@@ -8,7 +8,7 @@
     "start": "node server.js",
     "server": "node server.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently --kill-others \"nodemon run server\" \"npm run client\""
+    "dev": "concurrently --kill-others \"nodemon run server\" \"npm run client\" --ignore client"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/acd37/book-tracker/issues"
   },
-  "homepage": "https://github.com/acd37/book-tracker#readme"
+  "homepage": "https://github.com/acd37/book-tracker#readme",
+  "dependencies": {
+    "concurrently": "^5.1.0",
+    "express": "^4.17.1"
+  }
 }
