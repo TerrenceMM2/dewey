@@ -1,5 +1,5 @@
 {
-  "name": "book-tracker",
+  "name": "dewey",
   "version": "1.0.0",
   "description": "### 🚧  Under Construction  🚧",
   "main": "server.js",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/acd37/book-tracker.git"
+    "url": "git+https://github.com/acd37/dewey.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/acd37/book-tracker/issues"
+    "url": "https://github.com/acd37/dewey/issues"
   },
-  "homepage": "https://github.com/acd37/book-tracker#readme",
+  "homepage": "https://github.com/acd37/dewey#readme",
   "dependencies": {
     "chalk": "^3.0.0",
     "compression": "^1.7.4",
