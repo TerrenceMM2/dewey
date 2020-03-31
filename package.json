@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
-    "start": "node server.js",
+    "start": "node server.compiled.js",
     "server": "node server.js",
     "build": "babel server.js --out-file server.compiled.js",
     "client": "npm start --prefix client",
