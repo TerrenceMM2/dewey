@@ -21,8 +21,10 @@
   },
   "homepage": "https://github.com/acd37/book-tracker#readme",
   "dependencies": {
+    "chalk": "^3.0.0",
     "compression": "^1.7.4",
     "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "morgan": "^1.10.0"
   }
 }

@@ -1,10 +1,11 @@
 const express = require('express');
 require('dotenv').config();
 const path = require("path");
-const morganConfig = require('./config/morganConfig');
+const { morganConfig } = require('./config/morganConfig');
 const app = express();
 const PORT = 5000;
-const compression = require('compression')
+const compression = require('compression');
+
 
 // Server compression
 app.use(compression());
