@@ -1,5 +1,5 @@
 const express = require('express');
-const path = require("path");
+const path = require('path');
 const app = express();
 const PORT = 5000;
 
@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 app.get('/test', (req, res) => {
-    res.json({msg: 'Hello from the back on AWS!'});
+    res.json({ msg: 'Hello from the back on AWS!' });
 });
 
 app.listen(PORT, () => {
