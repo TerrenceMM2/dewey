@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 app.get('/test', (req, res) => {
-    res.json({msg: 'Hello from the back!'});
+    res.json({ msg: 'Hello from the back!' });
 });
 
 app.listen(PORT, () => {

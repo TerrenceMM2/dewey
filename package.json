@@ -7,8 +7,9 @@
     "client-install": "npm install --prefix client",
     "start": "node server.js",
     "server": "node server.js",
+    "build": "babel server.js --out-file server.compiled.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently --kill-others \"nodemon run server\" \"npm run client\""
+    "dev": "concurrently --kill-others \"nodemon run server\" \"npm run client\" --ignore client"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   },
   "homepage": "https://github.com/acd37/book-tracker#readme",
   "dependencies": {
+    "babel-cli": "^6.26.0",
     "concurrently": "^5.1.0",
     "express": "^4.17.1"
   }
