@@ -4,6 +4,7 @@ const app = express();
 const { Connection } = require('./loaders/Connection');
 const { Middleware } = require('./loaders/Middleware');
 
+// Middleware initialization
 const middleware = new Middleware(app, express);
 middleware.init();
 
