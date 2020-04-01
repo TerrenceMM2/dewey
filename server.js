@@ -1,12 +1,10 @@
 const express = require('express');
 require('dotenv').config();
-const path = require('path');
 const { morganConfig } = require('./config/morganConfig');
 const app = express();
-const PORT = 5000;
 const compression = require('compression');
-const chalk = require('chalk');
 const cors = require('cors');
+const { Connection } = require('./loaders/Connection');
 
 // Server compression
 app.use(compression());
@@ -24,10 +22,6 @@ app.use(morganConfig);
 // Routes
 app.get('/test', (req, res) => res.json({ msg: 'Hello from the back on AWS!' }));
 
-// Models
-const db = require('./models');
-
-db.sequelize.sync({ alter: true }).then(() => {
-  app.use(express.static(path.join(__dirname, 'client', 'build')));
-  app.listen(PORT, () => console.log(`Server running on port ${chalk.green.bold(PORT)}!`));
-});
+// Authenticate database and launch server
+const connection = new Connection(app, express);
+connection.authenticate();
