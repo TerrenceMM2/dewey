@@ -1,3 +1,1 @@
-module.exports = {
-  secretOrKey: process.env.SECRET_KEY
-};
+export const secretOrKey = process.env.SECRET_KEY;

@@ -1,15 +1,14 @@
 {
   "name": "dewey",
   "version": "1.0.0",
-  "description": "### 🚧  Under Construction  🚧",
+  "description": "🚧  Under Construction  🚧",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
     "deploy": "npm run build --prefix client && git add -A && git commit -m 'deployment ready' && git push origin HEAD",
-    "start": "node server.js",
-    "server": "node server.js",
+    "server": "nodemon --exec babel-node server.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently --kill-others \"nodemon run server\" \"npm run client\""
+    "dev": "concurrently --kill-others \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -31,5 +30,11 @@
     "morgan": "^1.10.0",
     "mysql2": "^2.1.0",
     "sequelize": "^5.21.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.0",
+    "babel-loader": "^8.1.0"
   }
 }

@@ -1,8 +1,9 @@
-const express = require('express');
-require('dotenv').config();
+import express from "express";
+import 'dotenv/config';
+import { Connection } from './loaders/Connection';
+import { Middleware } from './loaders/Middleware';
+
 const app = express();
-const { Connection } = require('./loaders/Connection');
-const { Middleware } = require('./loaders/Middleware');
 
 // Middleware initialization
 const middleware = new Middleware(app, express);
