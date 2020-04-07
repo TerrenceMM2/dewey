@@ -1,9 +1,9 @@
-const db = require('../models');
-const path = require('path');
-const chalk = require('chalk');
-const { PORT } = require('../constants/');
+import db from '../models';
+import path from 'path';
+import chalk from 'chalk';
+import { PORT } from '../constants/';
 
-class Connection {
+export class Connection {
   // brings in app and express
   constructor(app, express) {
     this.app = app;
@@ -36,7 +36,3 @@ class Connection {
     }
   }
 }
-
-module.exports = {
-  Connection
-};

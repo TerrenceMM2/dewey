@@ -1,8 +1,8 @@
-const { morganConfig } = require('../config/morganConfig');
-const compression = require('compression');
-const cors = require('cors');
+import { morganConfig } from '../config/morganConfig';
+import compression from 'compression'
+import cors from 'cors';
 
-class Middleware {
+export class Middleware {
   // constructor brings in app and express
   constructor(app, express) {
     this.app = app;
@@ -24,7 +24,3 @@ class Middleware {
     this.app.use(morganConfig);
   }
 }
-
-module.exports = {
-  Middleware
-};
