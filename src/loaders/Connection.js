@@ -27,7 +27,7 @@ export class Connection {
     try {
       // syncs the db
       await db.sequelize.sync({ alter: true });
-      this.app.use(this.express.static(path.join(__dirname, '../client', 'build')));
+      this.app.use(this.express.static(path.join(__dirname, '../../client', 'build')));
 
       // launches the app
       this.app.listen(PORT, () => console.log(`Server running on port ${chalk.green.bold(PORT)}!`));

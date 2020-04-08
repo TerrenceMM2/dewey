@@ -2,7 +2,7 @@ import Sequelize from 'sequelize';
 import path from 'path';
 import fs from 'fs';
 
-const env = process.env.NODE_ENV || 'development';
+const env = 'production';
 console.log(env)
 const config = require(path.join(__dirname, '..', 'config', 'config.js'))[env];
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
