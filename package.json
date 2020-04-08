@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
-    "deploy": "npm run build --prefix client && git add -A && git commit -m 'deployment ready' && git push origin HEAD",
+    "deploy": "npm run build --prefix client && git add -A && git commit -m \"deployment ready\" && git push origin HEAD",
     "start": "node server.js",
     "server": "nodemon --exec babel-node server.js",
     "client": "npm start --prefix client",
