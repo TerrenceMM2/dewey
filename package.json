@@ -6,7 +6,7 @@
   "scripts": {
     "client-install": "npm install --prefix client",
     "deploy": "npm run build --prefix client && git add -A && git commit -m \"deployment ready\" && git push origin HEAD",
-    "stop": "pkill --signal SIGINT app",
+    "stop": "pkill -signal SIGINT app",
     "start": "npm stop && node server.js",
     "server": "nodemon --exec babel-node server.js",
     "client": "npm start --prefix client",
