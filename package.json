@@ -8,7 +8,7 @@
     "deploy": "npm run build --prefix client && git add -A && git commit -m \"deployment ready\" && git push origin HEAD",
     "start": "node dist/server.js",
     "build": "babel src --out-dir dist",
-    "server": "nodemon --exec babel-node server.js",
+    "server": "nodemon --exec babel-node src/server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently --kill-others \"npm run server\" \"npm run client\""
   },
@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/acd37/dewey#readme",
   "dependencies": {
+    "@babel/runtime": "^7.9.2",
     "axios": "^0.19.2",
+    "babel-loader": "^8.1.0",
     "chalk": "^3.0.0",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
@@ -31,10 +33,15 @@
     "express": "^4.17.1",
     "morgan": "^1.10.0",
     "mysql2": "^2.1.0",
-    "sequelize": "^5.21.5",
+    "nodemon": "^2.0.2",
+    "sequelize": "^5.21.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
     "@babel/node": "^7.8.7",
+    "@babel/plugin-transform-runtime": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
-    "babel-loader": "^8.1.0"
+    "concurrently": "^5.1.0"
   }
 }

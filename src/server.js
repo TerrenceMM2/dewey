@@ -10,7 +10,7 @@ const middleware = new Middleware(app, express);
 middleware.init();
 
 // Routes
-app.get('/test', (req, res) => res.json({ msg: 'Hello from AWS! This application was last updated on Tuesday, April 7th, 2020' }));
+app.get('/test', (req, res) => res.json({ msg: 'Hello from AWS! This application was last updated on Wednesday, April 8th, 2020' }));
 
 // Authenticate database and launch server
 const connection = new Connection(app, express);
