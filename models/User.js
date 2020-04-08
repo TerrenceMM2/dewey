@@ -1,19 +1,5 @@
-import Sequelize from 'sequelize';
-
-module.exports = (sequelize, DataTypes) => {
-  class User extends Sequelize.Model {
-    static init() {
-      return super.init(
-        {
-          // columns go here
-        },
-        {
-          sequelize,
-          tableName: 'users',
-        }
-      );
-    }
-  }
+module.exports = function (sequelize, Sequelize) {
+  const User = sequelize.define('user', {});
 
   return User;
 };

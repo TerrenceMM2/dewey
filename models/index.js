@@ -1,26 +1,29 @@
-import Sequelize from 'sequelize';
-import path from 'path';
-import fs from 'fs';
+'use strict';
 
-const env = process.env.NODE_ENV || 'development';
-const config = require(path.join(__dirname, '..', 'config', 'config.js'))[env];
-const sequelize = new Sequelize(config.database, config.username, config.password, config);
+var fs = require('fs');
+var path = require('path');
+var Sequelize = require('sequelize');
+var env = process.env.NODE_ENV || 'development';
+var config = require(path.join(__dirname, '..', 'config', 'config.js'))[env];
+var sequelize = new Sequelize(config.database, config.username, config.password, config);
+var db = {};
 
-const Book = sequelize.import(__dirname + '/Book.js');
-const User = sequelize.import(__dirname + '/User.js');
+fs.readdirSync(__dirname)
+  .filter(function (file) {
+    return file.indexOf('.') !== 0 && file !== 'index.js';
+  })
+  .forEach(function (file) {
+    var model = sequelize.import(path.join(__dirname, file));
+    db[model.name] = model;
+  });
 
-const models = {
-  Book: Book.init(),
-  User: User.init(),
-};
+Object.keys(db).forEach(function (modelName) {
+  if ('associate' in db[modelName]) {
+    db[modelName].associate(db);
+  }
+});
 
-Object.values(models)
-  .filter((model) => typeof model.associate === 'function')
-  .forEach((model) => model.associate(models));
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
 
-const db = {
-  ...models,
-  sequelize,
-};
-
-export default db;
+module.exports = db;
