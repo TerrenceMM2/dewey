@@ -16,7 +16,7 @@ _Dewey is a personal library application that allows you to keep track of all bo
 
 # The Tech Stuff
 
-**Deployment**: AWS CodePipeline, AWS Elastic Beanstalk
+**Deployment**: AWS CodeBuild, AWS CodePipeline, AWS Elastic Beanstalk
 
 **Server**: Node.js, Express, MySQL, Passport.js
 
