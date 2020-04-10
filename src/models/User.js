@@ -6,14 +6,12 @@ module.exports = function (sequelize, Sequelize) {
       defaultValue: Sequelize.UUIDV4,
     },
     firstName: {
-      type: Sequelize.UUID,
+      type: Sequelize.STRING,
       primaryKey: true,
-      defaultValue: Sequelize.UUIDV4,
     },
     lastName: {
-      type: Sequelize.UUID,
+      type: Sequelize.STRING,
       primaryKey: true,
-      defaultValue: Sequelize.UUIDV4,
     },
     email: {
       type: Sequelize.STRING,
