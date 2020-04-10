@@ -27,6 +27,7 @@ export const LoginForm = () => {
     ? (content = <Redirect to="/dashboard" />)
     : (content = (
         <form onSubmit={handleForm}>
+          <p>{message}</p>
           <fieldset>
             <input
               type="email"

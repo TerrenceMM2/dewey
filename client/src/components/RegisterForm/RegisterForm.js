@@ -35,7 +35,7 @@ export const RegisterForm = () => {
   };
 
   if (auth) {
-    content = <Redirect to="/profile" />;
+    content = <Redirect to="/" />;
   } else if (registered) {
     content = <Redirect to="/" />;
   } else {
