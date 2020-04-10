@@ -1,6 +1,6 @@
 import db from '../models';
 
-exports.test = async function (query) {
+exports.test = async (query) => {
   try {
     return {
       error: false,
@@ -31,7 +31,7 @@ exports.getAll = async () => {
     return {
       error: true,
       statusCode: 500,
-      errors,
+      error,
     };
   }
 };

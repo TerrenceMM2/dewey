@@ -1,38 +1,53 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect, useContext } from 'react';
 import './App.css';
+import { Nav } from './components/Nav/Nav';
+import { Login } from './pages/Login';
+import { Register } from './pages/Register';
+import { Dashboard } from './pages/Dashboard';
+import { NoMatch } from './pages/NoMatch';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import axios from 'axios';
+import { UserContext } from './context/contexts/UserContext';
 
-class App extends Component {
+const App = () => {
+  const [state, setState] = useState('');
+  const { user } = useContext(UserContext);
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      testMsg: ""
-    }
-  }
+  const getTest = () => {
+    const response = axios({
+      method: 'GET',
+      url: '/test',
+    });
+    return response;
+  };
 
-  getTest() {
-    fetch('/test')
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          testMsg: data.msg
-        });
-      });
-  }
+  useEffect(() => {
+    const mountFunction = async () => {
+      try {
+        const response = await getTest();
+        setState(response.data.msg);
+      } catch (error) {
+        console.log(error.response);
+      }
+    };
+    mountFunction();
+  }, [user]);
 
-  componentDidMount() {
-    this.getTest();
-  }
+  return (
+    <div className="App">
+      <p>{state}</p>
+      <Router>
+        <Nav />
 
-  render() {
-    return (
-      <div className="App">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{this.state.testMsg}</p>
-      </div>
-    );
-  }
-}
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact component={NoMatch} />
+        </Switch>
+      </Router>
+    </div>
+  );
+};
 
 export default App;

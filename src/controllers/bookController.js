@@ -1,6 +1,6 @@
 import BookService from '../services/bookService';
 
-exports.test = async function (req, res, next) {
+exports.test = async (req, res, next) => {
   try {
     const response = await BookService.test();
     return res.status(response.statusCode).json(response);
@@ -9,7 +9,7 @@ exports.test = async function (req, res, next) {
   }
 };
 
-exports.getAll = async function (req, res, next) {
+exports.getAll = async (req, res, next) => {
   try {
     const response = await BookService.getAll();
     return res.status(response.statusCode).json(response);
