@@ -1,4 +1,5 @@
 import express from 'express';
+import passport from 'passport';
 import 'dotenv/config';
 import { Connection } from './loaders/Connection';
 import { Middleware } from './loaders/Middleware';
@@ -8,6 +9,10 @@ const app = express();
 // Middleware initialization
 const middleware = new Middleware(app, express);
 middleware.init();
+
+// Passport initialization
+app.use(passport.initialize());
+require('./config/passport')(passport);
 
 // Routes
 app.get('/test', (req, res) =>

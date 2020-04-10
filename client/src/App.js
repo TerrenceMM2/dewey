@@ -1,38 +1,53 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Nav } from './components//Nav/Nav';
+import { Login } from './pages/Login';
+import { Register } from './pages/Register';
+import { Dashboard } from './pages/Dashboard';
+import { NoMatch } from './pages/NoMatch';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import axios from 'axios';
 
-class App extends Component {
+const App = () => {
+  const [state, setState] = useState('');
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      testMsg: ""
-    }
-  }
+  const getTest = () => {
+    const response = axios({
+      method: 'GET',
+      url: '/test',
+    });
+    return response;
+  };
 
-  getTest() {
-    fetch('/test')
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          testMsg: data.msg
-        });
-      });
-  }
+  useEffect(() => {
+    const mountFunction = async () => {
+      try {
+        const response = await getTest();
+        setState(response.data.msg);
+      } catch (error) {
+        console.log(error.response);
+      }
+    };
+    mountFunction();
+  });
 
-  componentDidMount() {
-    this.getTest();
-  }
-
-  render() {
-    return (
-      <div className="App">
+  return (
+    <div className="App">
+      <Router>
+        <Nav />
         <img src={logo} className="App-logo" alt="logo" />
-        <p>{this.state.testMsg}</p>
-      </div>
-    );
-  }
-}
+        <p>{state}</p>
+
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact component={NoMatch} />
+        </Switch>
+      </Router>
+    </div>
+  );
+};
 
 export default App;

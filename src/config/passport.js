@@ -11,14 +11,8 @@ module.exports = (passport) => {
   passport.use(
     new JwtStrategy(opts, (payload, done) => {
       db.user
-        .findOne({
-          where: {
-            id: payload.id,
-          },
-        })
-        .then((user) => {
-          user ? done(null, user) : done(null, false);
-        })
+        .findOne({ where: { id: payload.id } })
+        .then((user) => (user ? done(null, user) : done(null, false)))
         .catch((err) => done(err, false));
     })
   );
