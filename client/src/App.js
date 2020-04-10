@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect, useContext } from 'react';
 import './App.css';
 import { Nav } from './components//Nav/Nav';
 import { Login } from './pages/Login';
@@ -8,9 +7,11 @@ import { Dashboard } from './pages/Dashboard';
 import { NoMatch } from './pages/NoMatch';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from './context/contexts/UserContext';
 
 const App = () => {
   const [state, setState] = useState('');
+  const { user } = useContext(UserContext);
 
   const getTest = () => {
     const response = axios({
@@ -30,14 +31,13 @@ const App = () => {
       }
     };
     mountFunction();
-  });
+  }, [user]);
 
   return (
     <div className="App">
+      <p>{state}</p>
       <Router>
         <Nav />
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{state}</p>
 
         <Switch>
           <Route exact path="/" component={Login} />

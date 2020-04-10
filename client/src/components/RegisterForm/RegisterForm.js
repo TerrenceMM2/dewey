@@ -21,9 +21,9 @@ export const RegisterForm = () => {
     if (password === match) {
       try {
         const response = await SendRegister(firstName, lastName, email, password);
-        dispatch({ type: 'REGISTER_SUCCESS', payload: { message: response.data } });
+        dispatch({ type: 'REGISTER_SUCCESS', payload: { message: response.data.data } });
       } catch (error) {
-        dispatch({ type: 'REGISTER_FAILURE', payload: { message: error.response.data } });
+        dispatch({ type: 'REGISTER_FAILURE', payload: { message: error.response.data.data } });
         setPassword('');
         setMatch('');
       }

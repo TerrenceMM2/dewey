@@ -1,15 +1,19 @@
 import express from 'express';
-const router = express.Router();
 import passport from 'passport';
-import { RegisterController, LoginController } from '../controllers/userController';
+import UserController from '../controllers/userController';
+const router = express.Router();
+
+// @route GET api/user/test
+// @desc tests the user api route
+router.get('/api/user/test', UserController.test);
 
 // @route POST api/user/register
 // @desc handles user registration from client
-router.post('/api/user/register', RegisterController);
+router.post('/api/user/register', UserController.register);
 
 // @route POST api/user/login
 // @desc handles user login from client
-router.post('/api/user/login', LoginController);
+router.post('/api/user/login', UserController.login);
 
 // @route GET api/user/validate
 // @desc tests validation of json web token
