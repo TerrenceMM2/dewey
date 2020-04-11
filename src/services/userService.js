@@ -104,3 +104,11 @@ exports.login = async (req, res, next) => {
     token: `Bearer ${token}`,
   };
 };
+
+exports.validate = async (req, res, next) => {
+  return {
+    error: false,
+    statusCode: 200,
+    data: 'Authorized',
+  };
+};

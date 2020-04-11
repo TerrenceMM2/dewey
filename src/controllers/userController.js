@@ -1,4 +1,5 @@
 import UserService from '../services/userService';
+import passport from 'passport';
 
 exports.test = async (req, res, next) => {
   try {
@@ -28,6 +29,7 @@ exports.login = async (req, res, next) => {
 };
 
 exports.validate = async (req, res, next) => {
+  console.log('here');
   try {
     const response = await UserService.validate();
     return res.status(response.statusCode).json(response);
