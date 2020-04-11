@@ -1,49 +1,51 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Quagga from 'quagga';
+import test from './test.jpg';
 
 const Scanner = (props) => {
-  useEffect(() => {
-    Quagga.init(
+  const fileInput = useRef(null);
+
+  const handleChange = (e) => {
+    const file = URL.createObjectURL(fileInput.current.files[0]);
+
+    Quagga.decodeSingle(
       {
-        inputStream: {
-          type: 'LiveStream',
-          constraints: {
-            width: 640,
-            height: 480,
-            facing: 'environment',
-          },
-        },
-        locator: {
-          patchSize: 'medium',
-          halfSample: true,
-        },
-        numOfWorkers: 2,
         decoder: {
-          readers: ['ean_reader'],
+          readers: ['ean_reader'], // List of active readers
         },
-        locate: true,
+        locate: true, // try to locate the barcode in the image
+        // You can set the path to the image in your server
+        // or using it's base64 data URI representation data:image/jpg;base64, + data
+        src: file,
       },
-      (err) => {
-        if (err) {
-          return console.log(err);
+      function (result) {
+        console.log(result);
+
+        if (result.codeResult) {
+          props.handleDetected(result);
+
+          console.log('result', result.codeResult.code);
+        } else {
+          console.log('not detected');
         }
-        console.log('Initialization finished. Ready to start scanning.');
-        Quagga.start();
       }
     );
-    Quagga.onDetected(_onDetected);
-  });
-
-  //   componentWillUnmount() {
-  //     Quagga.offDetected(this._onDetected);
-  //   }
-
-  const _onDetected = (result) => {
-    Quagga.stop();
-    props.handleDetected(result);
   };
 
-  return <div id="interactive" className="viewport" />;
+  return (
+    <fieldset class="input-group">
+      <input
+        type="file"
+        accept="image/*"
+        capture="camera"
+        ref={fileInput}
+        onChange={handleChange}
+      />
+      <button>Rerun</button>
+    </fieldset>
+  );
+  {
+    /* <div id="interactive" className="viewport" />; */
+  }
 };
-
 export default Scanner;
