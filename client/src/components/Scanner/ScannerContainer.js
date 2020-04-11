@@ -6,17 +6,18 @@ const ScannerApp = () => {
   const [results, setResults] = useState('');
 
   const handleDetected = (result) => {
-    setResults(result.codeResult.code);
+    if (result.codeResult.code) {
+      setResults(result.codeResult.code);
+    } else {
+      setResults(result);
+    }
   };
 
   return (
     <div>
-      {/* <button onClick={scan}>{scanning ? 'Stop' : 'Scan Barcode'}</button> */}
-
       <ul className="results">
         <Result key={results} result={results} />
       </ul>
-
       <Scanner handleDetected={handleDetected} />
     </div>
   );
