@@ -1,7 +1,37 @@
 import React, { useRef } from 'react';
 import Quagga from 'quagga';
+import { createUseStyles } from 'react-jss';
+
+const useStyles = createUseStyles({
+  wrapper: {
+    position: 'absolute',
+    overflow: 'hidden',
+    display: 'inline-block',
+    border: 'none',
+    right: 10,
+    bottom: 10,
+  },
+  btn: {
+    width: 56,
+    height: 56,
+    color: 'white',
+    borderRadius: '50%',
+    backgroundColor: '#30336b',
+    border: 'none',
+    boxSizing: 'border-box',
+  },
+  input: {
+    fontSize: 100,
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    opacity: 0,
+    cursor: 'pointer',
+  },
+});
 
 const Scanner = (props) => {
+  const classes = useStyles();
   const fileInput = useRef(null);
 
   const handleChange = () => {
@@ -16,25 +46,36 @@ const Scanner = (props) => {
         src: file,
       },
       (result) => {
+        console.log(result);
+
         if (result.codeResult) {
-          props.handleDetected(result);
+          props.handleDetected({
+            success: true,
+            ...result,
+          });
         } else {
-          props.handleDetected('not detected');
+          props.handleDetected({
+            success: false,
+            data: 'Not detected.',
+          });
         }
       }
     );
   };
 
   return (
-    <fieldset class="input-group">
+    <fieldset className={classes.wrapper}>
+      <button className={classes.btn}>
+        <span class="material-icons">camera_alt</span>
+      </button>
       <input
         type="file"
         accept="image/*"
         capture="camera"
         ref={fileInput}
         onChange={handleChange}
+        className={classes.input}
       />
-      <button>Rerun</button>
     </fieldset>
   );
 };
