@@ -10,7 +10,8 @@
         "build": "babel src --out-dir dist",
         "server": "nodemon --exec babel-node src/server.js",
         "client": "npm start --prefix client",
-        "dev": "concurrently --kill-others \"npm run server\" \"npm run client\""
+        "dev": "concurrently --kill-others \"npm run server\" \"npm run client\"",
+        "pretty-quick": "pretty-quick"
     },
     "repository": {
         "type": "git",

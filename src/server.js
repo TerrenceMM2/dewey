@@ -16,9 +16,9 @@ require('./config/passport')(passport);
 
 // Routes
 app.get('/test', (req, res) =>
-  res.json({
-    msg: 'Hello from AWS! This application was last updated on Wednesday, April 8th, 2020',
-  })
+    res.json({
+        msg: 'Hello from AWS! This application was last updated on Wednesday, April 8th, 2020'
+    })
 );
 
 import bookRoutes from './routes/bookRoutes';
