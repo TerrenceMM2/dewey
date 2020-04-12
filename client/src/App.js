@@ -10,44 +10,44 @@ import axios from 'axios';
 import { UserContext } from './context/contexts/UserContext';
 
 const App = () => {
-  const [state, setState] = useState('');
-  const { user } = useContext(UserContext);
+    const [state, setState] = useState('');
+    const { user } = useContext(UserContext);
 
-  const getTest = () => {
-    const response = axios({
-      method: 'GET',
-      url: '/test',
-    });
-    return response;
-  };
-
-  useEffect(() => {
-    const mountFunction = async () => {
-      try {
-        const response = await getTest();
-        setState(response.data.msg);
-      } catch (error) {
-        console.log(error.response);
-      }
+    const getTest = () => {
+        const response = axios({
+            method: 'GET',
+            url: '/test'
+        });
+        return response;
     };
-    mountFunction();
-  }, [user]);
 
-  return (
-    <div className="App">
-      <p>{state}</p>
-      <Router>
-        <Nav />
+    useEffect(() => {
+        const mountFunction = async () => {
+            try {
+                const response = await getTest();
+                setState(response.data.msg);
+            } catch (error) {
+                console.log(error.response);
+            }
+        };
+        mountFunction();
+    }, [user]);
 
-        <Switch>
-          <Route exact path="/" component={Login} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact component={NoMatch} />
-        </Switch>
-      </Router>
-    </div>
-  );
+    return (
+        <div className="App">
+            <p>{state}</p>
+            <Router>
+                <Nav />
+
+                <Switch>
+                    <Route exact path="/" component={Login} />
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/dashboard" component={Dashboard} />
+                    <Route exact component={NoMatch} />
+                </Switch>
+            </Router>
+        </div>
+    );
 };
 
 export default App;

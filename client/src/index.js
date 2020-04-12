@@ -6,10 +6,10 @@ import * as serviceWorker from './serviceWorker';
 import { UserContextProvider } from './context/contexts/UserContext';
 
 ReactDOM.render(
-  <UserContextProvider>
-    <App />
-  </UserContextProvider>,
-  document.getElementById('root')
+    <UserContextProvider>
+        <App />
+    </UserContextProvider>,
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
