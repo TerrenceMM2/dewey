@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import Quagga from 'quagga';
 import { createUseStyles } from 'react-jss';
+import { colors } from '../constants/';
 
 const useStyles = createUseStyles({
   wrapper: {
@@ -16,7 +17,7 @@ const useStyles = createUseStyles({
     height: 56,
     color: 'white',
     borderRadius: '50%',
-    backgroundColor: '#30336b',
+    backgroundColor: colors.PRIMARY,
     border: 'none',
     boxSizing: 'border-box',
   },

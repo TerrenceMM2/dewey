@@ -1,6 +1,11 @@
 const colors = {
-  PRIMARY: 'red',
-  SECONDARY: 'blue',
+  PRIMARY: '#30336b',
+  SECONDARY: '',
+  LIGHT: '',
+  DARK: '',
+  SUCCESS: '',
+  DANGER: '',
+  WARNING: '',
 };
 
 export default colors;
