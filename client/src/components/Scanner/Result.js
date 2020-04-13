@@ -7,7 +7,11 @@ const Result = (props) => {
     return null;
   }
 
-  return <div> ISBN:{result} </div>;
+  if (!result.success) {
+    return <div> {result.data} </div>;
+  } else {
+    return <div> ISBN: {result.codeResult.code} </div>;
+  }
 };
 
 export default Result;
