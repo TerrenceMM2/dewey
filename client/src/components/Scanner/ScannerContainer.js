@@ -6,11 +6,7 @@ const ScannerApp = () => {
     const [results, setResults] = useState('');
 
     const handleDetected = result => {
-        if (result.codeResult.code) {
-            setResults(result.codeResult.code);
-        } else {
-            setResults(result);
-        }
+        setResults(result);
     };
 
     return (
