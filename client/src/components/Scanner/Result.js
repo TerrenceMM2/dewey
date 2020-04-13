@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-const Result = (props) => {
-  const result = props.result;
+const Result = props => {
+    const result = props.result;
 
-  if (!result) {
-    return null;
-  }
+    if (!result) {
+        return null;
+    }
 
   if (!result.success) {
     return <div> {result.data} </div>;

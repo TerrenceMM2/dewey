@@ -18,9 +18,9 @@ router.post('/api/user/login', UserController.login);
 // @route GET api/user/validate
 // @desc tests validation of json web token
 router.get(
-  '/api/user/validate',
-  passport.authenticate('jwt', { session: false }),
-  UserController.validate
+    '/api/user/validate',
+    passport.authenticate('jwt', { session: false }),
+    UserController.validate
 );
 
 export default router;

@@ -35,8 +35,8 @@ const Scanner = (props) => {
   const classes = useStyles();
   const fileInput = useRef(null);
 
-  const handleChange = () => {
-    const file = URL.createObjectURL(fileInput.current.files[0]);
+    const handleChange = () => {
+        const file = URL.createObjectURL(fileInput.current.files[0]);
 
     Quagga.decodeSingle(
       {
