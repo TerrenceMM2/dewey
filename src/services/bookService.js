@@ -1,4 +1,5 @@
 import db from '../models';
+import { isbnValidation } from '../helpers/validationHelper';
 const axios = require('axios');
 
 exports.test = async query => {
@@ -37,7 +38,17 @@ exports.getAll = async () => {
     }
 };
 
-exports.getBookIsbn = async isbn => {
+exports.getBookIsbn = async (req, res, next) => {
+    const { isbn } = req.params;
+
+    const { error } = await isbnValidation(req.params);
+    if (error)
+        return {
+            error: true,
+            statusCode: 400,
+            data: error.details[0].message
+        };
+
     try {
         // Finds book in local DB by ISBN first
         const book = await db.book.findAll({
