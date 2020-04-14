@@ -10,4 +10,8 @@ router.get('/api/book/test', BookController.test);
 // @desc gets all books
 router.get('/api/book', BookController.getAll);
 
+// @route GET api/book
+// @desc gets all books
+router.get('/api/book/:isbn', BookController.getBookIsbn);
+
 export default router;

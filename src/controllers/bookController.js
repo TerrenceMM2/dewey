@@ -17,3 +17,12 @@ exports.getAll = async (req, res, next) => {
         return res.status(error.statusCode).json(error);
     }
 };
+
+exports.getBookIsbn = async (req, res, next) => {
+    try {
+        const response = await BookService.getBookIsbn(req.params.isbn);
+        return res.status(response.statusCode).json(response);
+    } catch (error) {
+        return res.status(error.statusCode).json(error);
+    }
+};
