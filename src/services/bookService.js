@@ -39,21 +39,21 @@ exports.getAll = async () => {
 
 exports.getBookIsbn = async isbn => {
     try {
+        // Finds book in local DB by ISBN first
         const book = await db.book.findAll({
             where: {
                 isbn: isbn
             }
         });
 
-        console.log('book1: ', book);
-
+        // If 0 results are return, calls the Google Books API
         if (book.length === 0) {
             const gbData = await axios.get(
                 `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`
             );
 
-            const { title, authors, description } = gbData.data.volumeInfo;
-            const { thumbnail } = gbData.data.volumeInfo.imageLinks;
+            const { title, authors, description } = gbData.data.items[0].volumeInfo;
+            const { thumbnail } = gbData.data.items[0].volumeInfo.imageLinks;
 
             const data = {
                 isbn,
@@ -63,21 +63,20 @@ exports.getBookIsbn = async isbn => {
                 bookDesc: description
             };
 
+            // Creates local DB record
             const book = await db.book.create(data);
-
-            console.log('book2: ', book);
 
             return {
                 error: false,
-                statusCode: 200,
-                data: gbData.data.items
+                statusCode: 201,
+                data: book.dataValues
             };
         }
 
         return {
             error: false,
             statusCode: 200,
-            book
+            book: book[0]
         };
     } catch (error) {
         return {
