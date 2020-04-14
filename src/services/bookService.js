@@ -39,14 +39,45 @@ exports.getAll = async () => {
 
 exports.getBookIsbn = async isbn => {
     try {
-        const gbData = await axios.get(
-            `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`
-        );
+        const book = await db.book.findAll({
+            where: {
+                isbn: isbn
+            }
+        });
+
+        console.log('book1: ', book);
+
+        if (book.length === 0) {
+            const gbData = await axios.get(
+                `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`
+            );
+
+            const { title, authors, description } = gbData.data.volumeInfo;
+            const { thumbnail } = gbData.data.volumeInfo.imageLinks;
+
+            const data = {
+                isbn,
+                bookName: title,
+                bookAuthor: JSON.stringify(authors),
+                bookImg: thumbnail,
+                bookDesc: description
+            };
+
+            const book = await db.book.create(data);
+
+            console.log('book2: ', book);
+
+            return {
+                error: false,
+                statusCode: 200,
+                data: gbData.data.items
+            };
+        }
 
         return {
             error: false,
             statusCode: 200,
-            data: gbData.data.items
+            book
         };
     } catch (error) {
         return {
