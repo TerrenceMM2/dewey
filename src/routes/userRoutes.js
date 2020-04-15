@@ -23,4 +23,12 @@ router.get(
     UserController.validate
 );
 
+// @route GET api/user/books
+// @desc gets all books of user
+router.get(
+    '/api/user/books',
+    passport.authenticate('jwt', { session: false }),
+    UserController.getUserBooks
+);
+
 export default router;
