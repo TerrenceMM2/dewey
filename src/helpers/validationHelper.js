@@ -17,5 +17,12 @@ module.exports = {
             password: joi.string().min(6).required()
         });
         return schema.validate(data);
+    },
+
+    isbnValidation: data => {
+        const schema = joi.object({
+            isbn: joi.string().min(10).max(13).required()
+        });
+        return schema.validate(data);
     }
 };

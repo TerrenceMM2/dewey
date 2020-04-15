@@ -1,29 +1,19 @@
 module.exports = function (sequelize, Sequelize) {
-    const Book = sequelize.define('book', {
+    const Ownership = sequelize.define('ownership', {
         id: {
             type: Sequelize.UUID,
             primaryKey: true,
             defaultValue: Sequelize.UUIDV4
         },
-        isbn: {
+        userId: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        bookName: {
+        bookId: {
             type: Sequelize.STRING,
             allowNull: false
-        },
-        bookAuthor: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
-        bookImg: {
-            type: Sequelize.STRING
-        },
-        bookDesc: {
-            type: Sequelize.STRING
         }
     });
 
-    return Book;
+    return Ownership;
 };
