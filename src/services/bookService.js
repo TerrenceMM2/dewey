@@ -38,10 +38,11 @@ exports.getAll = async () => {
     }
 };
 
-exports.getBookIsbn = async (req, res, next) => {
+exports.getBookIsbn = async req => {
     const { isbn } = req.params;
 
     const { error } = await isbnValidation(req.params);
+
     if (error)
         return {
             error: true,
@@ -88,6 +89,28 @@ exports.getBookIsbn = async (req, res, next) => {
             error: false,
             statusCode: 200,
             book: book[0]
+        };
+    } catch (error) {
+        return {
+            error: true,
+            statusCode: 500,
+            error
+        };
+    }
+};
+
+exports.addBook = async req => {
+    try {
+        const userId = req.user.dataValues.id;
+        const bookId = req.body.bookId;
+
+        const data = await db.ownership.create({ userId, bookId });
+
+        return {
+            error: false,
+            statusCode: 201,
+            msg: 'Book added.',
+            data
         };
     } catch (error) {
         return {

@@ -8,6 +8,10 @@ module.exports = function (sequelize, Sequelize) {
         userId: {
             type: Sequelize.STRING,
             allowNull: false
+        },
+        bookId: {
+            type: Sequelize.STRING,
+            allowNull: false
         }
     });
 

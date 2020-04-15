@@ -20,7 +20,16 @@ exports.getAll = async (req, res, next) => {
 
 exports.getBookIsbn = async (req, res, next) => {
     try {
-        const response = await BookService.getBookIsbn(req, res, next);
+        const response = await BookService.getBookIsbn(req);
+        return res.status(response.statusCode).json(response);
+    } catch (error) {
+        return res.status(error.statusCode).json(error);
+    }
+};
+
+exports.addBook = async (req, res, next) => {
+    try {
+        const response = await BookService.addBook(req);
         return res.status(response.statusCode).json(response);
     } catch (error) {
         return res.status(error.statusCode).json(error);
