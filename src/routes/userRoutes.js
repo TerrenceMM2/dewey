@@ -31,4 +31,12 @@ router.get(
     UserController.getUserBooks
 );
 
+// @route DELETE api/user/book
+// @desc deletes user book
+router.delete(
+    '/api/user/book',
+    passport.authenticate('jwt', { session: false }),
+    UserController.deleteUserBook
+);
+
 export default router;
