@@ -3,6 +3,7 @@ import * as jwt from 'jsonwebtoken';
 import { registerValidation, loginValidation } from '../helpers/validationHelper';
 import db from '../models';
 const { secretOrKey } = require('../config/keys');
+import Error from '../lib/Error';
 
 exports.test = async query => {
     try {
@@ -77,12 +78,7 @@ exports.login = async (req, res, next) => {
         };
 
     const userFound = await db.user.findOne({ where: { email } });
-    if (!userFound)
-        return {
-            error: true,
-            statusCode: 400,
-            data: 'Email or password is incorrect.'
-        };
+    if (!userFound) return new Error(true, 400, 'Email or password is incorrect.');
 
     const match = await bcrypt.compare(password, userFound.password);
     if (!match)

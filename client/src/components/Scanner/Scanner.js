@@ -43,10 +43,11 @@ const Scanner = props => {
                 decoder: {
                     readers: ['ean_reader']
                 },
+                facingMode: 'environment',
                 locate: true,
                 src: file
             },
-            result => {
+            function (result) {
                 console.log(result);
 
                 if (result.codeResult) {

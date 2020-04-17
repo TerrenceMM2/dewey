@@ -1,4 +1,5 @@
 import db from '../models';
+import CFonts from 'cfonts';
 import path from 'path';
 import chalk from 'chalk';
 import { PORT } from '../constants';
@@ -30,9 +31,14 @@ export class Connection {
             this.app.use(this.express.static(path.join(__dirname, '../../client', 'build')));
 
             // launches the app
-            this.app.listen(PORT, () =>
-                console.log(`Server running on port ${chalk.green.bold(PORT)}!`)
-            );
+            this.app.listen(PORT, () => {
+                CFonts.say(`Dewey`, {
+                    font: 'simple',
+                    colors: ['greenBright'],
+                    independentGradient: true
+                });
+                console.log(`Server running on port ${chalk.green.bold(PORT)}!`);
+            });
         } catch (err) {
             console.error(err);
         }
