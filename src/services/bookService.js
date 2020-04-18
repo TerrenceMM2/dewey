@@ -1,6 +1,6 @@
 import db from '../models';
 import { isbnValidation } from '../helpers/validationHelper';
-const axios = require('axios');
+import axios from 'axios';
 
 exports.test = async query => {
     try {
