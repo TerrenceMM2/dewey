@@ -2,8 +2,8 @@ import bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import { registerValidation, loginValidation } from '../helpers/validationHelper';
 import db from '../models';
-const { secretOrKey } = require('../config/keys');
 import Error from '../lib/Error';
+import { secretOrKey } from '../config/keys';
 
 exports.test = async query => {
     try {
