@@ -78,7 +78,12 @@ exports.login = async (req, res, next) => {
         };
 
     const userFound = await db.user.findOne({ where: { email } });
-    if (!userFound) return new Error(true, 400, 'Email or password is incorrect.');
+    if (!userFound)
+        return {
+            error: 400,
+            statusCode: 200,
+            data: 'Email or password is incorrect.'
+        };
 
     const match = await bcrypt.compare(password, userFound.password);
     if (!match)

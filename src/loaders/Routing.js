@@ -1,15 +1,17 @@
 import bookRoutes from '../routes/bookRoutes';
 import userRoutes from '../routes/userRoutes';
+import authRoutes from '../routes/authRoutes';
 
 export class Routing {
-  // constructor brings in app and express
-  constructor(app, express) {
-    this.app = app;
-    this.express = express;
-  }
+    // constructor brings in app and express
+    constructor(app, express) {
+        this.app = app;
+        this.express = express;
+    }
 
-  init() {
-    this.app.use(bookRoutes);
-    this.app.use(userRoutes);
-  }
+    init() {
+        this.app.use(authRoutes);
+        this.app.use(bookRoutes);
+        this.app.use(userRoutes);
+    }
 }
