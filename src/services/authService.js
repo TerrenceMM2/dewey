@@ -6,7 +6,6 @@ import {
     passwordValidation
 } from '../helpers/validationHelper';
 import db from '../models';
-import Error from '../lib/Error';
 import { secretOrKey } from '../config/keys';
 
 exports.test = async query => {
