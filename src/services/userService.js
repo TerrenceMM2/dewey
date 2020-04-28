@@ -49,3 +49,39 @@ exports.deleteUserBook = async (req, res, next) => {
         };
     }
 };
+
+exports.updateUser = async (req, res, next) => {
+    const userId = req.user.dataValues.id;
+    const { firstName, lastName, email } = req.body;
+    try {
+        const isUpdated = await db.user.update(
+            { firstName, lastName, email },
+            { where: { id: userId } }
+        );
+
+        if (isUpdated) {
+            const user = await db.user.findOne({
+                where: {
+                    id: userId
+                }
+            });
+
+            return {
+                error: false,
+                statusCode: 200,
+                updatedUser: {
+                    id: user.id,
+                    email: user.email,
+                    firstName: user.firstName,
+                    lastName: user.lastName
+                }
+            };
+        }
+    } catch (error) {
+        return {
+            error: true,
+            statusCode: 500,
+            error
+        };
+    }
+};

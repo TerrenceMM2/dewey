@@ -19,4 +19,12 @@ router.delete(
     UserController.deleteUserBook
 );
 
+// @route PUT api/auth/update
+// @desc updates a users profile
+router.put(
+    '/api/user/update',
+    passport.authenticate('jwt', { session: false }),
+    UserController.updateUser
+);
+
 export default router;
