@@ -123,8 +123,6 @@ exports.updatePassword = async (req, res, next) => {
     const { password } = req.body;
 
     const { error } = await passwordValidation(req.body);
-
-    console.log(error);
     if (error)
         return {
             error: true,
@@ -138,9 +136,6 @@ exports.updatePassword = async (req, res, next) => {
 
     try {
         const isUpdated = await db.user.update({ password: hash }, { where: { id: userId } });
-
-        console.log('updated', isUpdated);
-
         if (isUpdated) {
             return {
                 error: false,
@@ -149,7 +144,6 @@ exports.updatePassword = async (req, res, next) => {
             };
         }
     } catch (error) {
-        console.log('err', error);
         return {
             error: true,
             statusCode: 400,
