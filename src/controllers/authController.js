@@ -35,3 +35,12 @@ exports.validate = async (req, res, next) => {
         return res.status(error.statusCode).json(error);
     }
 };
+
+exports.updatePassword = async (req, res, next) => {
+    try {
+        const response = await AuthService.updatePassword(req, res, next);
+        return res.status(response.statusCode).json(response);
+    } catch (error) {
+        return res.status(error.statusCode).json(error);
+    }
+};

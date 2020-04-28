@@ -1,6 +1,10 @@
 import bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
-import { registerValidation, loginValidation } from '../helpers/validationHelper';
+import {
+    registerValidation,
+    loginValidation,
+    passwordValidation
+} from '../helpers/validationHelper';
 import db from '../models';
 import Error from '../lib/Error';
 import { secretOrKey } from '../config/keys';
@@ -112,4 +116,44 @@ exports.validate = async (req, res, next) => {
         statusCode: 200,
         data: 'Authorized'
     };
+};
+
+exports.updatePassword = async (req, res, next) => {
+    const userId = req.user.id;
+    const { password } = req.body;
+
+    const { error } = await passwordValidation(req.body);
+
+    console.log(error);
+    if (error)
+        return {
+            error: true,
+            statusCode: 400,
+            data: error.details[0].message
+        };
+
+    const salt = await bcrypt.genSalt();
+
+    const hash = await bcrypt.hash(password, salt);
+
+    try {
+        const isUpdated = await db.user.update({ password: hash }, { where: { id: userId } });
+
+        console.log('updated', isUpdated);
+
+        if (isUpdated) {
+            return {
+                error: false,
+                statusCode: 200,
+                msg: 'Password successfully updated.'
+            };
+        }
+    } catch (error) {
+        console.log('err', error);
+        return {
+            error: true,
+            statusCode: 400,
+            error
+        };
+    }
 };

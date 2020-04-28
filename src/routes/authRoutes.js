@@ -23,4 +23,10 @@ router.get(
     AuthController.validate
 );
 
+router.patch(
+    '/api/auth/password',
+    passport.authenticate('jwt', { session: false }),
+    AuthController.updatePassword
+);
+
 export default router;
