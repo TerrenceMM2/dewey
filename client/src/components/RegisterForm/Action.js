@@ -4,7 +4,7 @@ import { titleCase } from 'title-case';
 export const SendRegister = (firstName, lastName, email, password) => {
     const response = axios({
         method: 'POST',
-        url: '/api/user/register',
+        url: '/api/auth/register',
         data: {
             firstName: titleCase(firstName.toLocaleLowerCase()),
             lastName: titleCase(lastName.toLocaleLowerCase()),
