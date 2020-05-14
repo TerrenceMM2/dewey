@@ -4,15 +4,44 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { UserContextProvider } from './context/contexts/UserContext';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+    typography: {
+        useNextVariants: true,
+        fontFamily: ['Roboto', 'sans-serif'].join(',')
+    },
+    palette: {
+        primary: {
+            main: '#576574'
+        },
+        secondary: {
+            main: '#5f27cd'
+        }
+    },
+    overrides: {
+        MuiButton: {
+            text: {
+                backgroundColor: '#5f27cd',
+                color: '#fff',
+                boxShadow: 'none',
+                padding: '10px 20px',
+                marginBottom: '10px',
+                '&:hover': {
+                    backgroundColor: '#341f97'
+                }
+            }
+        }
+    }
+});
 
 ReactDOM.render(
     <UserContextProvider>
-        <App />
+        <MuiThemeProvider theme={theme}>
+            <App />
+        </MuiThemeProvider>
     </UserContextProvider>,
     document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();

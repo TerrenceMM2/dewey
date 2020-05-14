@@ -3,6 +3,8 @@ import Quagga from 'quagga';
 import { createUseStyles } from 'react-jss';
 import { colors } from '../constants/';
 
+import { BrowserBarcodeReader } from '@zxing/library';
+
 const useStyles = createUseStyles({
     wrapper: {
         position: 'absolute',
@@ -35,34 +37,71 @@ const Scanner = props => {
     const classes = useStyles();
     const fileInput = useRef(null);
 
+    // const handleChange = () => {
+    //     const file = URL.createObjectURL(fileInput.current.files[0]);
+
+    //     Quagga.decodeSingle(
+    //         {
+    //             decoder: {
+    //                 readers: ['ean_reader']
+    //             },
+    //             facingMode: 'environment',
+    //             locate: true,
+    //             src: file
+    //         },
+    //         function (result) {
+    //             console.log(result);
+
+    //             if (result.codeResult) {
+    //                 props.handleDetected({
+    //                     success: true,
+    //                     ...result
+    //                 });
+    //             } else {
+    //                 props.handleDetected({
+    //                     success: false,
+    //                     data: 'Not detected.'
+    //                 });
+    //             }
+    //         }
+    //     );
+    // };
+
     const handleChange = () => {
+        const codeReader = new BrowserBarcodeReader();
+        console.log('ZXing code reader initialized');
         const file = URL.createObjectURL(fileInput.current.files[0]);
 
-        Quagga.decodeSingle(
-            {
-                decoder: {
-                    readers: ['ean_reader']
-                },
-                facingMode: 'environment',
-                locate: true,
-                src: file
-            },
-            function (result) {
+        codeReader
+            .decodeFromImage(fileInput.current.files[0])
+            .then(result => {
                 console.log(result);
 
-                if (result.codeResult) {
-                    props.handleDetected({
-                        success: true,
-                        ...result
-                    });
-                } else {
-                    props.handleDetected({
-                        success: false,
-                        data: 'Not detected.'
-                    });
-                }
-            }
-        );
+                props.handleDetected({
+                    success: true,
+                    ...result
+                });
+            })
+            .catch(err => {
+                console.error(err);
+                props.handleDetected({
+                    success: false,
+                    data: 'Not detected.'
+                });
+            });
+    };
+
+    const handleStart = async () => {
+        const img = URL.createObjectURL(fileInput.current.files[0]);
+
+        const codeReader = new BrowserBarcodeReader();
+
+        try {
+            const result = await codeReader.decodeFromImage(img);
+            console.log(result);
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     return (
@@ -70,12 +109,13 @@ const Scanner = props => {
             <button className={classes.btn}>
                 <span className="material-icons">camera_alt</span>
             </button>
+
             <input
                 type="file"
                 accept="image/*"
                 capture="camera"
                 ref={fileInput}
-                onChange={handleChange}
+                onChange={handleStart}
                 className={classes.input}
             />
         </fieldset>

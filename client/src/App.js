@@ -35,9 +35,7 @@ const App = () => {
 
     return (
         <div className="App">
-            <p>{state}</p>
             <Router>
-                <Nav />
                 <Switch>
                     <Route exact path="/" component={Login} />
                     <Route exact path="/register" component={Register} />
