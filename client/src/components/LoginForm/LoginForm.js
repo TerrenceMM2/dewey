@@ -22,12 +22,12 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
         alignItems: 'center'
     },
-    image: {
-        backgroundImage: `url(${require('../../assets/images/library.jpeg')})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-    },
+    // image: {
+    //     backgroundImage: `url(${require('../../assets/images/books.jpeg')})`,
+    //     backgroundRepeat: 'no-repeat',
+    //     backgroundSize: 'cover',
+    //     backgroundPosition: 'center'
+    // },
     avatar: {
         margin: theme.spacing(1),
         backgroundColor: theme.palette.primary.main
@@ -67,9 +67,8 @@ export const LoginForm = () => {
     auth
         ? (content = <Redirect to="/dashboard" />)
         : (content = (
-              <Grid container component="main" className={classes.root}>
-                  <Grid item xs={false} sm={4} md={7} className={classes.image} />
-                  <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6}>
+              <Grid container component="main" className={classes.root} justify="center">
+                  <Grid item xs={12} sm={8} md={4}>
                       <div className={classes.paper}>
                           <Avatar className={classes.avatar}>
                               <LockOutlinedIcon />
@@ -77,6 +76,14 @@ export const LoginForm = () => {
                           <Typography component="h1" variant="h4">
                               Welcome to Dewey
                           </Typography>
+
+                          <img
+                              src={require('../../assets/images/avatar.png')}
+                              alt="avatar"
+                              width="150"
+                              style={{ padding: 30 }}
+                          />
+
                           <form
                               onSubmit={handleForm}
                               className={classes.form}
