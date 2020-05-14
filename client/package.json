@@ -1,41 +1,46 @@
 {
-  "name": "client",
-  "version": "0.1.0",
-  "private": true,
-  "proxy": "http://localhost:5000",
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "axios": "^0.19.2",
-    "jwt-decode": "^2.2.0",
-    "quagga": "^0.12.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-jss": "^10.1.1",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1",
-    "title-case": "^3.0.2"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "name": "client",
+    "version": "0.1.0",
+    "private": true,
+    "proxy": "http://localhost:5000",
+    "dependencies": {
+        "@material-ui/core": "^4.9.14",
+        "@material-ui/icons": "^4.9.1",
+        "@material-ui/lab": "^4.0.0-alpha.53",
+        "@testing-library/jest-dom": "^4.2.4",
+        "@testing-library/react": "^9.3.2",
+        "@testing-library/user-event": "^7.1.2",
+        "@zxing/library": "^0.17.0",
+        "axios": "^0.19.2",
+        "jwt-decode": "^2.2.0",
+        "quagga": "^0.12.1",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "react-html5-camera-photo": "^1.5.4",
+        "react-jss": "^10.1.1",
+        "react-router-dom": "^5.1.2",
+        "react-scripts": "3.4.1",
+        "title-case": "^3.0.2"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
 }
