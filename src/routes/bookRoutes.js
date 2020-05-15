@@ -13,10 +13,16 @@ router.get('/api/book', BookController.getAll);
 
 // @route GET api/book/:isbn
 // @desc get book by isbn
+// router.get(
+//     '/api/book/:isbn',
+//     passport.authenticate('jwt', { session: false }),
+//     BookController.getBookIsbn
+// );
+
 router.get(
-    '/api/book/:isbn',
+    '/api/book/:searchTerm',
     passport.authenticate('jwt', { session: false }),
-    BookController.getBookIsbn
+    BookController.getBook
 );
 
 // @route POST api/book
