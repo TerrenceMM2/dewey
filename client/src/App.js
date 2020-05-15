@@ -7,21 +7,10 @@ import { NoMatch } from './pages/NoMatch';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from './context/contexts/UserContext';
+import { PrivateRoute } from './utils/PrivateRoute';
 
 const App = () => {
     const { user } = useContext(UserContext);
-
-    // useEffect(() => {
-    //     const mountFunction = async () => {
-    //         try {
-    //             const response = await getTest();
-    //             setState(response.data.msg);
-    //         } catch (error) {
-    //             console.log(error.response);
-    //         }
-    //     };
-    //     mountFunction();
-    // }, [user]);
 
     return (
         <div className="App">
@@ -29,7 +18,7 @@ const App = () => {
                 <Switch>
                     <Route exact path="/" component={Login} />
                     <Route exact path="/register" component={Register} />
-                    <Route exact path="/dashboard" component={Dashboard} />
+                    <PrivateRoute exact path="/dashboard" component={Dashboard} />
                     <Route exact component={NoMatch} />
                 </Switch>
             </Router>
