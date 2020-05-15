@@ -19,15 +19,6 @@ exports.getAll = async (req, res, next) => {
     }
 };
 
-// exports.getBookIsbn = async (req, res, next) => {
-//     try {
-//         const response = await BookService.getBookIsbn(req);
-//         return res.status(response.statusCode).json(response);
-//     } catch (error) {
-//         return res.status(error.statusCode).json(error);
-//     }
-// };
-
 exports.getBook = async (req, res, next) => {
     const { searchTerm } = req.params;
     const { searchType } = req.query;

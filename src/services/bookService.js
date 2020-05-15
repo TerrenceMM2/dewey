@@ -103,7 +103,7 @@ exports.getBookIsbn = async isbn => {
 exports.getBookAuthor = async author => {
     try {
         // Finds book in local DB by ISBN first
-        const book = await db.book.findAll({
+        const existingBooks = await db.book.findAll({
             where: {
                 bookAuthor: {
                     [Op.like]: `%${author}%`
@@ -112,7 +112,7 @@ exports.getBookAuthor = async author => {
         });
 
         // If 0 results are return, calls the Google Books API
-        if (book.length === 0) {
+        if (existingBooks.length === 0) {
             const gbData = await axios.get(
                 `https://www.googleapis.com/books/v1/volumes?q=inauthor:${author}`
             );
@@ -154,7 +154,7 @@ exports.getBookAuthor = async author => {
         return {
             error: false,
             statusCode: 200,
-            book: book[0]
+            data: existingBooks
         };
     } catch (error) {
         return {
@@ -168,7 +168,7 @@ exports.getBookAuthor = async author => {
 exports.getBookTitle = async title => {
     try {
         // Finds book in local DB by ISBN first
-        const book = await db.book.findAll({
+        const existingBooks = await db.book.findAll({
             where: {
                 bookName: {
                     [Op.like]: `%${title}%`
@@ -177,7 +177,7 @@ exports.getBookTitle = async title => {
         });
 
         // If 0 results are return, calls the Google Books API
-        if (book.length === 0) {
+        if (existingBooks.length === 0) {
             const gbData = await axios.get(
                 `https://www.googleapis.com/books/v1/volumes?q=intitle:${title}`
             );
@@ -219,7 +219,7 @@ exports.getBookTitle = async title => {
         return {
             error: false,
             statusCode: 200,
-            book: book[0]
+            data: existingBooks
         };
     } catch (error) {
         return {
