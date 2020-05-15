@@ -22,7 +22,6 @@ exports.getAll = async (req, res, next) => {
 exports.getBook = async (req, res, next) => {
     const { searchTerm } = req.params;
     const { searchType } = req.query;
-
     try {
         let response;
 
