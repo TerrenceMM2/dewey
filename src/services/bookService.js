@@ -119,11 +119,15 @@ exports.getBookAuthor = async author => {
 
             const books = [];
             const { items } = gbData.data;
-            console.log(items[0].volumeInfo.industryIdentifiers[0].identifier);
+
             for (let i = 0; i < items.length; i++) {
                 const { title, authors, description } = items[i].volumeInfo;
-                const { isbn } = items[i].volumeInfo.industryIdentifiers[0].identifier;
                 const { thumbnail } = items[i].volumeInfo.imageLinks;
+                let isbn;
+
+                for (let j = 0; j < items[i].volumeInfo.industryIdentifiers.length; j++) {
+                    isbn = items[i].volumeInfo.industryIdentifiers[0].identifier;
+                }
 
                 const book = {
                     isbn,
@@ -136,11 +140,14 @@ exports.getBookAuthor = async author => {
                 books.push(book);
             }
 
+            // grabs all books returned by gb and adds them to the database for later use
+            const newBooks = await createBooks(books);
+
             return {
                 error: false,
                 statusCode: 201,
                 items: books.length,
-                data: books
+                data: newBooks
             };
         }
 
@@ -177,11 +184,15 @@ exports.getBookTitle = async title => {
 
             const books = [];
             const { items } = gbData.data;
-            console.log(items[0].volumeInfo.industryIdentifiers[0].identifier);
+
             for (let i = 0; i < items.length; i++) {
                 const { title, authors, description } = items[i].volumeInfo;
-                const { isbn } = items[i].volumeInfo.industryIdentifiers[0].identifier;
                 const { thumbnail } = items[i].volumeInfo.imageLinks;
+                let isbn;
+
+                for (let j = 0; j < items[i].volumeInfo.industryIdentifiers.length; j++) {
+                    isbn = items[i].volumeInfo.industryIdentifiers[0].identifier;
+                }
 
                 const book = {
                     isbn,
@@ -194,11 +205,14 @@ exports.getBookTitle = async title => {
                 books.push(book);
             }
 
+            // grabs all books returned by gb and adds them to the database for later use
+            const newBooks = await createBooks(books);
+
             return {
                 error: false,
                 statusCode: 201,
                 items: books.length,
-                data: books
+                data: newBooks
             };
         }
 
@@ -229,6 +243,39 @@ exports.addBook = async req => {
             msg: 'Book added.',
             data
         };
+    } catch (error) {
+        return {
+            error: true,
+            statusCode: 500,
+            error
+        };
+    }
+};
+
+const createBooks = async bookData => {
+    try {
+        let newBooks = [];
+
+        // Creates local DB record for each book returned from gbBooks
+        for (let i = 0; i < bookData.length; i++) {
+            // checks if the book record exists in our database by isbn
+            const book = await db.book.findOne({
+                where: {
+                    isbn: bookData[i].isbn
+                }
+            });
+
+            // if it doesn't, go ahead and create that new record
+            if (!book) {
+                const newBook = await db.book.create(bookData[i]);
+
+                // push the new record to an array
+                newBooks.push(newBook.dataValues);
+            }
+        }
+
+        // return all new book records
+        return newBooks;
     } catch (error) {
         return {
             error: true,
