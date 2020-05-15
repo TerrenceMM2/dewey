@@ -5,7 +5,7 @@ import { Register } from './pages/Register';
 import { Dashboard } from './pages/Dashboard';
 import { NoMatch } from './pages/NoMatch';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import axios from 'axios';
+import Footer from './components/Footer';
 import { UserContext } from './context/contexts/UserContext';
 import { PrivateRoute } from './utils/PrivateRoute';
 
@@ -22,6 +22,7 @@ const App = () => {
                     <Route exact component={NoMatch} />
                 </Switch>
             </Router>
+            <Footer />
         </div>
     );
 };
