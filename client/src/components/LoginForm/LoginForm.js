@@ -17,17 +17,11 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.secondary.main
     },
     paper: {
-        margin: theme.spacing(8, 4),
+        margin: theme.spacing(3),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
     },
-    // image: {
-    //     backgroundImage: `url(${require('../../assets/images/books.jpeg')})`,
-    //     backgroundRepeat: 'no-repeat',
-    //     backgroundSize: 'cover',
-    //     backgroundPosition: 'center'
-    // },
     avatar: {
         margin: theme.spacing(1),
         backgroundColor: theme.palette.primary.main
@@ -70,19 +64,18 @@ export const LoginForm = () => {
               <Grid container component="main" className={classes.root} justify="center">
                   <Grid item xs={12} sm={8} md={4}>
                       <div className={classes.paper}>
-                          <Avatar className={classes.avatar}>
-                              <LockOutlinedIcon />
-                          </Avatar>
-                          <Typography component="h1" variant="h4">
-                              Welcome to Dewey
-                          </Typography>
-
                           <img
                               src={require('../../assets/images/avatar.png')}
                               alt="avatar"
                               width="150"
                               style={{ padding: 30 }}
                           />
+                          <Avatar className={classes.avatar}>
+                              <LockOutlinedIcon />
+                          </Avatar>
+                          <Typography variant="h4" style={{ textAlign: 'center' }}>
+                              Welcome back!
+                          </Typography>
 
                           <form
                               onSubmit={handleForm}
@@ -103,10 +96,10 @@ export const LoginForm = () => {
                                   value={email}
                                   onChange={e => setEmail(e.target.value)}
                               />
-                              <br />
                               <TextField
                                   required
                                   fullWidth
+                                  margin="normal"
                                   color="secondary"
                                   variant="outlined"
                                   type="password"
@@ -114,20 +107,22 @@ export const LoginForm = () => {
                                   value={password}
                                   onChange={e => setPassword(e.target.value)}
                               />
-                              <br />
                               <Button fullWidth className={classes.submit} type="submit">
                                   Login
                               </Button>
                           </form>
 
-                          <p style={{ textAlign: 'center' }}>Forgot password?</p>
+                          <Typography variant="body1" style={{ marginTop: 20 }}>
+                              Forgot password?
+                          </Typography>
 
-                          <p style={{ textAlign: 'center' }}>
+                          <Typography variant="body1" style={{ marginTop: 20 }}>
                               Don't have an account?{' '}
                               <Link to="/register" className={classes.link}>
                                   Sign up
                               </Link>
-                          </p>
+                              .
+                          </Typography>
                       </div>
                   </Grid>
               </Grid>
