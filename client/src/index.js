@@ -22,9 +22,10 @@ const theme = createMuiTheme({
     overrides: {
         MuiButton: {
             text: {
-                backgroundColor: '#5f27cd',
+                background: 'linear-gradient(to right, #5f27cd, #7f44f2)',
                 color: '#fff',
-                boxShadow: 'none',
+                boxShadow:
+                    '-10px -10px 30px 4px rgba(0,0,0,0.1), 10px 10px 30px 4px rgba(95,39,205,0.3)',
                 padding: '10px 20px',
                 marginBottom: '10px',
                 '&:hover': {

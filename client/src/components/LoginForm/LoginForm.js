@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { Redirect, useHistory, Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { UserContext } from '../../context/contexts/UserContext';
 import { SendLogin } from './Action';
 
 // style imports
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField, Grid, Button, Paper, Avatar, Typography } from '@material-ui/core';
+import { TextField, Grid, Button, Avatar, Typography } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 const useStyles = makeStyles(theme => ({

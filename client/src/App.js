@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './App.css';
-import { Nav } from './components/Nav/Nav';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Dashboard } from './pages/Dashboard';
@@ -10,28 +9,19 @@ import axios from 'axios';
 import { UserContext } from './context/contexts/UserContext';
 
 const App = () => {
-    const [state, setState] = useState('');
     const { user } = useContext(UserContext);
 
-    const getTest = () => {
-        const response = axios({
-            method: 'GET',
-            url: '/test'
-        });
-        return response;
-    };
-
-    useEffect(() => {
-        const mountFunction = async () => {
-            try {
-                const response = await getTest();
-                setState(response.data.msg);
-            } catch (error) {
-                console.log(error.response);
-            }
-        };
-        mountFunction();
-    }, [user]);
+    // useEffect(() => {
+    //     const mountFunction = async () => {
+    //         try {
+    //             const response = await getTest();
+    //             setState(response.data.msg);
+    //         } catch (error) {
+    //             console.log(error.response);
+    //         }
+    //     };
+    //     mountFunction();
+    // }, [user]);
 
     return (
         <div className="App">
