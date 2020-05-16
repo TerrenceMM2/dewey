@@ -7,16 +7,18 @@ import { NoMatch } from './pages/NoMatch';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Footer from './components/Footer';
 import { UserContext } from './context/contexts/UserContext';
+import { PrivateRoute } from './utils/PrivateRoute';
 
 const App = () => {
     const { user } = useContext(UserContext);
+
     return (
         <div className="App">
             <Router>
                 <Switch>
                     <Route exact path="/" component={Login} />
                     <Route exact path="/register" component={Register} />
-                    <Route exact path="/dashboard" component={Dashboard} />
+                    <PrivateRoute exact path="/dashboard" component={Dashboard} />
                     <Route exact component={NoMatch} />
                 </Switch>
             </Router>
