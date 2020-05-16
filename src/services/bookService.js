@@ -66,24 +66,23 @@ exports.getBookIsbn = async isbn => {
                 `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`
             );
 
-            const { title, authors, description } = gbData.data.items[0].volumeInfo;
-            const { thumbnail } = gbData.data.items[0].volumeInfo.imageLinks;
-
-            const data = {
-                isbn,
-                bookName: title,
-                bookAuthor: JSON.stringify(authors),
-                bookImg: thumbnail,
-                bookDesc: description
-            };
+            const items = gbData.data.items[0];
+            const data = {};
+            data.isbn = isbn;
+            data.bookName = items.volumeInfo.title;
+            data.bookAuthor = JSON.stringify(items.volumeInfo.authors);
+            data.bookDesc = items.volumeInfo.description;
+            data.bookImg = items.volumeInfo.imageLinks
+                ? items.volumeInfo.imageLinks.thumbnail
+                : null;
 
             // Creates local DB record
-            const book = await db.book.create(data);
+            // const book = await db.book.create(data);
 
             return {
                 error: false,
                 statusCode: 201,
-                data: book.dataValues
+                data
             };
         }
 
@@ -93,6 +92,7 @@ exports.getBookIsbn = async isbn => {
             book: book[0]
         };
     } catch (error) {
+        console.log(error);
         return {
             error: true,
             statusCode: 500,
@@ -122,33 +122,33 @@ exports.getBookAuthor = async author => {
             const { items } = gbData.data;
 
             for (let i = 0; i < items.length; i++) {
-                const { title, authors, description } = items[i].volumeInfo;
-                const { thumbnail } = items[i].volumeInfo.imageLinks;
                 let isbn;
+                const book = {};
+
+                book.bookName = items[i].volumeInfo.title;
+                book.bookAuthor = JSON.stringify(items[i].volumeInfo.authors);
+                book.bookDesc = items[i].volumeInfo.description;
+                book.bookImg = items[i].volumeInfo.imageLinks
+                    ? items[i].volumeInfo.imageLinks.thumbnail
+                    : null;
 
                 for (let j = 0; j < items[i].volumeInfo.industryIdentifiers.length; j++) {
                     isbn = items[i].volumeInfo.industryIdentifiers[0].identifier;
                 }
 
-                const book = {
-                    isbn,
-                    bookName: title,
-                    bookAuthor: JSON.stringify(authors),
-                    bookImg: thumbnail,
-                    bookDesc: description
-                };
+                book.isbn = isbn;
 
                 books.push(book);
             }
 
             // grabs all books returned by gb and adds them to the database for later use
-            const newBooks = await createBooks(books);
+            // const newBooks = await createBooks(books);
 
             return {
                 error: false,
                 statusCode: 201,
                 items: books.length,
-                data: newBooks
+                data: books
             };
         }
 
@@ -158,6 +158,8 @@ exports.getBookAuthor = async author => {
             data: existingBooks
         };
     } catch (error) {
+        console.log(error);
+
         return {
             error: true,
             statusCode: 500,
@@ -187,33 +189,33 @@ exports.getBookTitle = async title => {
             const { items } = gbData.data;
 
             for (let i = 0; i < items.length; i++) {
-                const { title, authors, description } = items[i].volumeInfo;
-                const { thumbnail } = items[i].volumeInfo.imageLinks;
                 let isbn;
+                const book = {};
+
+                book.bookName = items[i].volumeInfo.title;
+                book.bookAuthor = JSON.stringify(items[i].volumeInfo.authors);
+                book.bookDesc = items[i].volumeInfo.description;
+                book.bookImg = items[i].volumeInfo.imageLinks
+                    ? items[i].volumeInfo.imageLinks.thumbnail
+                    : null;
 
                 for (let j = 0; j < items[i].volumeInfo.industryIdentifiers.length; j++) {
                     isbn = items[i].volumeInfo.industryIdentifiers[0].identifier;
                 }
 
-                const book = {
-                    isbn,
-                    bookName: title,
-                    bookAuthor: JSON.stringify(authors),
-                    bookImg: thumbnail,
-                    bookDesc: description
-                };
+                book.isbn = isbn;
 
                 books.push(book);
             }
 
             // grabs all books returned by gb and adds them to the database for later use
-            const newBooks = await createBooks(books);
+            // const newBooks = await createBooks(books);
 
             return {
                 error: false,
                 statusCode: 201,
                 items: books.length,
-                data: newBooks
+                data: books
             };
         }
 
