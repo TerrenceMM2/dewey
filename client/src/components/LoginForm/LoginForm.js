@@ -9,9 +9,6 @@ import { TextField, Grid, Button, Avatar, Typography } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 const useStyles = makeStyles(theme => ({
-    root: {
-        height: '100vh'
-    },
     link: {
         textDecoration: 'none',
         color: theme.palette.secondary.main
@@ -61,7 +58,7 @@ export const LoginForm = () => {
     auth
         ? (content = <Redirect to="/dashboard" />)
         : (content = (
-              <Grid container component="main" className={classes.root} justify="center">
+              <Grid container component="main" justify="center">
                   <Grid item xs={12} sm={8} md={4}>
                       <div className={classes.paper}>
                           <img
