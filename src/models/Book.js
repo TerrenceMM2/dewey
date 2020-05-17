@@ -21,7 +21,7 @@ module.exports = function (sequelize, Sequelize) {
             type: Sequelize.STRING
         },
         bookDesc: {
-            type: Sequelize.STRING
+            type: Sequelize.TEXT
         }
     });
 
