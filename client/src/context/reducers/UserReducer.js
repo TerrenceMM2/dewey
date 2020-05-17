@@ -25,6 +25,12 @@ export const UserReducer = (state, action) => {
             localStorage.removeItem('token');
             return { loggedIn: false, message: action.payload.error };
 
+        case 'UPDATE_PASSWORD_SUCCESS':
+            return { updatedPwd: true };
+
+        case 'UPDATE_PASSWORD_FAILURE':
+            return { updatedPwd: false, message: action.payload.error };
+
         default:
             return state;
     }
