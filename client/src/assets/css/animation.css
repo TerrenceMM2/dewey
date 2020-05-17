@@ -1,0 +1,15 @@
+img {
+    animation: jump 2s alternate infinite linear;
+    display: inline-block;
+    margin: 0 20px;
+}
+
+@keyframes jump {
+    from {
+        transform: translatey(0.3em) scaley(0.95);
+    }
+
+    to {
+        transform: translatey(-0.15em);
+    }
+}

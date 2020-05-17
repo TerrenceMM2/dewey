@@ -11,12 +11,14 @@ router.get('/api/book/test', BookController.test);
 // @desc gets all books
 router.get('/api/book', BookController.getAll);
 
-// @route GET api/book/:isbn
-// @desc get book by isbn
+// @route GET /api/book/search/:searchTerm?searchType=isbn
+// @route GET /api/book/search/:searchTerm?searchType=author
+// @route GET /api/book/search/:searchTerm?searchType=title
+// @desc makes a query to the db and searches for book, relays to gbooks if necessary
 router.get(
-    '/api/book/:isbn',
+    '/api/book/search/:searchTerm',
     passport.authenticate('jwt', { session: false }),
-    BookController.getBookIsbn
+    BookController.getBook
 );
 
 // @route POST api/book

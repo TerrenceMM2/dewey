@@ -1,4 +1,5 @@
 import BookService from '../services/bookService';
+import querystring from 'querystring';
 
 exports.test = async (req, res, next) => {
     try {
@@ -18,9 +19,24 @@ exports.getAll = async (req, res, next) => {
     }
 };
 
-exports.getBookIsbn = async (req, res, next) => {
+exports.getBook = async (req, res, next) => {
+    const { searchTerm } = req.params;
+    const { searchType } = req.query;
     try {
-        const response = await BookService.getBookIsbn(req);
+        let response;
+
+        switch (searchType) {
+            case 'isbn':
+                response = await BookService.getBookIsbn(searchTerm);
+                break;
+            case 'author':
+                response = await BookService.getBookAuthor(searchTerm);
+                break;
+            case 'title':
+                response = await BookService.getBookTitle(searchTerm);
+                break;
+        }
+
         return res.status(response.statusCode).json(response);
     } catch (error) {
         return res.status(error.statusCode).json(error);
