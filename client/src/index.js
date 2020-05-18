@@ -9,7 +9,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 const theme = createMuiTheme({
     typography: {
         useNextVariants: true,
-        fontFamily: ['Roboto', 'sans-serif'].join(',')
+        fontFamily: ['Dosis', 'sans-serif'].join(',')
     },
     palette: {
         primary: {
