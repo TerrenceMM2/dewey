@@ -1,8 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../context/contexts/UserContext';
 import { Redirect, Link } from 'react-router-dom';
-import ScannerContainer from '../components/Scanner/ScannerContainer';
-import SearchForm from '../components/Search/SearchForm';
+import { PasswordForm } from '../components/PasswordForm/PasswordForm';
 
 // style imports
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export const Dashboard = () => {
+export const UserAccount = () => {
     const { user } = useContext(UserContext);
     const auth = user.loggedIn;
 
@@ -26,19 +25,14 @@ export const Dashboard = () => {
 
     auth
         ? (content = (
-              <div
-                  style={{
-                      padding: 30
-                  }}>
-                  <ScannerContainer />
+              <div>
+                  <h3>Update Account</h3>
                   <Typography>
-                      <Link to="/account" className={classes.link}>
-                          Update Account
+                      <Link to="/dashboard" className={classes.link}>
+                          Dashboard
                       </Link>
                   </Typography>
-                  <Typography variant="h3">Dashboard</Typography>
-
-                  <SearchForm />
+                  <PasswordForm />
               </div>
           ))
         : (content = <Redirect to="/" />);

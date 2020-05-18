@@ -12,7 +12,7 @@ export const UserContextProvider = ({ children }) => {
             try {
                 const { exp } = decode(token);
                 if (exp > currentTime) {
-                    return { loggedIn: true };
+                    return { loggedIn: true, token };
                 } else if (currentTime >= exp) {
                     localStorage.removeItem('token');
                     return { loggedIn: false };
