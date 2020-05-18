@@ -24,6 +24,8 @@ router.get(
     AuthController.validate
 );
 
+// @route PATCH api/auth/password
+// @desc updates password from protected form
 router.patch(
     '/api/auth/password',
     passport.authenticate('jwt', { session: false }),

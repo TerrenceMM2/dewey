@@ -3,8 +3,6 @@ import React from 'react';
 const Result = props => {
     const result = props.result;
 
-    console.log(result);
-
     if (!result) {
         return null;
     }
