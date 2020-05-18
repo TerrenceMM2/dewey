@@ -8,30 +8,18 @@ import {
     Button,
     Typography
 } from '@material-ui/core';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
+import ResultsContainer from './ResultsContainer';
 import { makeStyles } from '@material-ui/core/styles';
 import { SendSearch } from './Action';
-import { truncate } from '../../utils/deweysToolkit';
 
 const useStyles = makeStyles(theme => ({
     root: {
         '& > *': {
-            margin: theme.spacing(1),
-            width: '25ch'
+            width: '25ch',
+            margin: theme.spacing(0, 2, 0, 0)
         }
-    },
-    card: {
-        margin: theme.spacing(2, 1),
-        padding: theme.spacing(2)
-    },
-    resultsCount: {
-        margin: theme.spacing(1)
     }
 }));
-
-const searchTypeOptions = ['Author', 'ISBN', 'Title'];
 
 const SearchForm = () => {
     const classes = useStyles();
@@ -49,7 +37,7 @@ const SearchForm = () => {
             const response = await SendSearch(searchTerm, searchType);
             setBooks(response.data.data);
         } catch (error) {
-            // dispatch({ type: 'LOGIN_FAILURE', payload: { message: error.response.data.data } });
+            // @TODO: HANDLE ERROR
             console.log('error', error);
         }
     };
@@ -98,27 +86,11 @@ const SearchForm = () => {
             </FormControl>
 
             {books.length > 0 && (
-                <Typography className={classes.resultsCount} variant="body1">
-                    Search results: {books.length}
-                </Typography>
+                <Typography variant="body1">Search results: {books.length}</Typography>
             )}
+
             {books.map(book => {
-                return (
-                    <Card className={classes.card} key={book.isbn}>
-                        <CardContent>
-                            <Typography variant="h5" component="h2">
-                                {book.bookName}
-                            </Typography>
-                            <Typography className={classes.pos} color="textSecondary">
-                                {book.bookAuthor}
-                            </Typography>
-                            <Typography variant="body2">{truncate(book.bookDesc, 280)}</Typography>
-                        </CardContent>
-                        <CardActions>
-                            <Button>Save to Library</Button>
-                        </CardActions>
-                    </Card>
-                );
+                return <ResultsContainer book={book} />;
             })}
         </div>
     );
