@@ -1,9 +1,13 @@
 import axios from 'axios';
 
-export const SendSearch = (searchType, searchTerm) => {
+export const SendSearch = (searchTerm, searchType) => {
     const response = axios({
-        method: 'POST',
-        url: `/api/book/${searchTerm}?searchType=${searchType}`
+        method: 'GET',
+        url: `/api/book/search/${searchTerm}/${searchType}`,
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
     });
+
     return response;
 };

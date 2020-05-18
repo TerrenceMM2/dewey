@@ -30,7 +30,7 @@ export const Dashboard = () => {
                   style={{
                       padding: 30
                   }}>
-                  <ScannerContainer />
+                  {/* <ScannerContainer /> */}
                   <Typography>
                       <Link to="/account" className={classes.link}>
                           Update Account

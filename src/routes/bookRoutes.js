@@ -16,7 +16,7 @@ router.get('/api/book', BookController.getAll);
 // @route GET /api/book/search/:searchTerm?searchType=title
 // @desc makes a query to the db and searches for book, relays to gbooks if necessary
 router.get(
-    '/api/book/search/:searchTerm',
+    '/api/book/search/:searchTerm/:searchType',
     passport.authenticate('jwt', { session: false }),
     BookController.getBook
 );
