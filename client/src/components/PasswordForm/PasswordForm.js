@@ -37,12 +37,12 @@ const useStyles = makeStyles(theme => ({
 
 export const PasswordForm = props => {
     const { user, dispatch } = useContext(UserContext);
+    const token = `Bearer ${user.token}`;
     const [password, setPassword] = useState('');
     const [match, setMatch] = useState('');
 
     const classes = useStyles();
 
-    const auth = user.loggedIn;
     let message = user.message;
     let content;
 
@@ -51,15 +51,18 @@ export const PasswordForm = props => {
 
         if (password === match) {
             try {
-                const response = await SendPassword(password);
+                const response = await SendPassword(password, token);
+                console.log(response);
                 dispatch({
                     type: 'UPDATE_PASSWORD_SUCCESS',
-                    payload: { message: response.data.data }
+                    payload: { message: response.data.msg, payload: { token: response.data.token } }
                 });
+                setPassword('');
+                setMatch('');
             } catch (error) {
                 dispatch({
                     type: 'UPDATE_PASSWORD_FAILURE',
-                    payload: { message: error.response }
+                    payload: { message: error.response.data.data }
                 });
                 setPassword('');
                 setMatch('');

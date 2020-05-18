@@ -50,8 +50,9 @@ export const LoginForm = () => {
             const response = await SendLogin(email, password);
             dispatch({ type: 'LOGIN_SUCCESS', payload: { token: response.data.token } });
         } catch (error) {
-            dispatch({ type: 'LOGIN_FAILURE', payload: { error: error.response.data.data } });
+            dispatch({ type: 'LOGIN_FAILURE', payload: { message: error.response.data.data } });
             setPassword('');
+            setEmail('');
         }
     };
 

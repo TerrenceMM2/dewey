@@ -3,7 +3,6 @@ import { UserContext } from '../context/contexts/UserContext';
 import { Redirect, Link } from 'react-router-dom';
 import ScannerContainer from '../components/Scanner/ScannerContainer';
 import SearchForm from '../components/Search/SearchForm';
-import { Typography } from '@material-ui/core';
 
 // style imports
 import { makeStyles } from '@material-ui/core/styles';
