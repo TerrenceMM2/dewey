@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import './App.css';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
@@ -11,8 +11,6 @@ import { UserContext } from './context/contexts/UserContext';
 import { PrivateRoute } from './utils/PrivateRoute';
 
 const App = () => {
-    const { user } = useContext(UserContext);
-
     return (
         <div className="App">
             <Router>
