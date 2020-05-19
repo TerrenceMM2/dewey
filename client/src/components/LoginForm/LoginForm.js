@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { UserContext } from '../../context/contexts/UserContext';
 import { SendLogin } from './Action';
+import setAuthToken from '../../utils/setAuthToken';
 
 // style imports
 import { makeStyles } from '@material-ui/core/styles';
@@ -49,6 +50,7 @@ export const LoginForm = () => {
         try {
             const response = await SendLogin(email, password);
             dispatch({ type: 'LOGIN_SUCCESS', payload: { token: response.data.token } });
+            setAuthToken(localStorage.token);
         } catch (error) {
             dispatch({ type: 'LOGIN_FAILURE', payload: { message: error.response.data.data } });
             setPassword('');
