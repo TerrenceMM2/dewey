@@ -1,27 +1,45 @@
 import React, { useState } from 'react';
-import { Select, TextField, MenuItem, InputLabel, FormControl } from '@material-ui/core';
+import {
+    Select,
+    TextField,
+    MenuItem,
+    InputLabel,
+    FormControl,
+    Button,
+    Typography
+} from '@material-ui/core';
+import ResultsContainer from './ResultsContainer';
 import { makeStyles } from '@material-ui/core/styles';
 import { SendSearch } from './Action';
 
 const useStyles = makeStyles(theme => ({
     root: {
         '& > *': {
-            margin: theme.spacing(1),
-            width: '25ch'
+            width: '25ch',
+            margin: theme.spacing(0, 2, 0, 0)
         }
     }
 }));
-
-const searchTypeOptions = ['Author', 'ISBN', 'Title'];
 
 const SearchForm = () => {
     const classes = useStyles();
 
     const [searchType, setSearchType] = useState('');
-    const [searchValue, setSearchValue] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
+    const [books, setBooks] = useState([]);
 
     const handleChange = event => {
         setSearchType(event.target.value);
+    };
+
+    const handleSearch = async event => {
+        try {
+            const response = await SendSearch(searchTerm, searchType);
+            setBooks(response.data.data);
+        } catch (error) {
+            // @TODO: HANDLE ERROR
+            console.log('error', error);
+        }
     };
 
     return (
@@ -47,18 +65,33 @@ const SearchForm = () => {
                 </Select>
 
                 {searchType !== '' && (
-                    <TextField
-                        id="outlined-basic"
-                        label="Search"
-                        variant="outlined"
-                        color="secondary"
-                        style={{
-                            width: 500,
-                            maxWidth: '90%'
-                        }}
-                    />
+                    <>
+                        <TextField
+                            id="outlined-basic"
+                            label="Search"
+                            variant="outlined"
+                            color="secondary"
+                            onChange={e => setSearchTerm(e.target.value)}
+                            value={searchTerm}
+                            style={{
+                                width: 500,
+                                maxWidth: '90%'
+                            }}
+                        />
+                        <Button className={classes.submit} onClick={handleSearch}>
+                            Search
+                        </Button>
+                    </>
                 )}
             </FormControl>
+
+            {books.length > 0 && (
+                <Typography variant="body1">Search results: {books.length}</Typography>
+            )}
+
+            {books.map(book => {
+                return <ResultsContainer book={book} />;
+            })}
         </div>
     );
 };

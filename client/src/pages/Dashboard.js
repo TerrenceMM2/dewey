@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { UserContext } from '../context/contexts/UserContext';
 import { Redirect, Link } from 'react-router-dom';
 import ScannerContainer from '../components/Scanner/ScannerContainer';
@@ -30,7 +30,7 @@ export const Dashboard = () => {
                   style={{
                       padding: 30
                   }}>
-                  <ScannerContainer />
+                  {/* <ScannerContainer /> */}
                   <Typography>
                       <Link to="/account" className={classes.link}>
                           Update Account
