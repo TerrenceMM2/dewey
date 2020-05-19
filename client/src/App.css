@@ -1,3 +1,26 @@
+html,
+body {
+    height: 100%;
+    font-family: sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Allows for sticky footer */
+.App {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.dewey {
+    margin: 0 20px;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
 }

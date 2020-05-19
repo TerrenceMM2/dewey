@@ -7,52 +7,57 @@ const Footer = () => {
     };
 
     return (
-        <div
+        <footer
             style={{
                 display: 'flex',
-                flexDirection: 'column',
+                flexDirection: 'row',
                 backgroundColor: '#5f27cd',
                 color: '#fff',
-                marginTop: 30,
-                padding: 30
+                padding: '5px 30px',
+                justifyContent: 'space-between',
+                alignItems: 'center'
             }}>
             <div>
                 <Typography variant="h2" gutterBottom>
                     Dewey
                 </Typography>
             </div>
-            <hr style={{ borderColor: 'rgba(255,255,255,0.7', width: '50%', marginLeft: 0 }} />
             <div>
                 <img
                     src={require('../../assets/images/dewey_sick.png')}
-                    height="100"
-                    width="100"
+                    height="50"
+                    width="50"
+                    className="dewey"
                     alt="writing dino"
                 />
-                <Typography variant="body2" display="block" gutterBottom>
-                    The boring legal stuff...not even Dewey enjoys this...
-                </Typography>
-                <Typography
-                    variant="caption"
-                    display="block"
-                    gutterBottom
-                    style={{ color: 'rgba(255,255,255,0.7' }}>
-                    Icons made by <em>Freepik</em> from{' '}
-                    <a style={{ color: 'rgba(255,255,255,0.7' }} href="https://www.flaticon.com">
-                        www.flaticon.com
-                    </a>
-                    .
-                </Typography>
-                <Typography
-                    variant="caption"
-                    display="block"
-                    gutterBottom
-                    style={{ color: 'rgba(255,255,255,0.7' }}>
-                    &copy; {getCopyrightYears()} |Terrence Mahnken, Pete Wanca, Alec Down. All
-                    Rights Reserved.
-                </Typography>
+                <div style={{ display: 'inline-block' }}>
+                    <Typography variant="body2" display="block" gutterBottom>
+                        The boring legal stuff...not even Dewey enjoys this...
+                    </Typography>
+                    <Typography
+                        variant="caption"
+                        display="block"
+                        gutterBottom
+                        style={{ color: 'rgba(255,255,255,0.7' }}>
+                        Icons made by <em>Freepik</em> from{' '}
+                        <a
+                            style={{ color: 'rgba(255,255,255,0.7' }}
+                            href="https://www.flaticon.com">
+                            www.flaticon.com
+                        </a>
+                        .
+                    </Typography>
+                    <Typography
+                        variant="caption"
+                        display="block"
+                        gutterBottom
+                        style={{ color: 'rgba(255,255,255,0.7' }}>
+                        &copy; {getCopyrightYears()} |Terrence Mahnken, Pete Wanca, Alec Down. All
+                        Rights Reserved.
+                    </Typography>
+                </div>
             </div>
-        </div>
+        </footer>
     );
 };
 

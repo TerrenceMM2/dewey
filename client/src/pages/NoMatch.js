@@ -21,6 +21,7 @@ export const NoMatch = () => {
                 <img
                     src={require('../assets/images/dewey_crying.png')}
                     height="200"
+                    className="error-dewey"
                     alt="crying dinosaur logo"
                 />
                 4
