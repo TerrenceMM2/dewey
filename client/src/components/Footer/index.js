@@ -54,7 +54,7 @@ const Footer = () => {
                         display="block"
                         gutterBottom
                         style={{ color: 'rgba(255,255,255,0.7' }}>
-                        &copy; {getCopyrightYears()} |Terrence Mahnken, Pete Wanca, Alec Down. All
+                        &copy; {getCopyrightYears()} | Terrence Mahnken, Pete Wanca, Alec Down. All
                         Rights Reserved.
                     </Typography>
                 </div>
