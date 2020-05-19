@@ -17,7 +17,10 @@ const Footer = () => {
                 padding: 30
             }}>
             <div>
-                <Typography variant="h2" gutterBottom>
+                <Typography
+                    variant="h2"
+                    gutterBottom
+                    style={{ fontFamily: "'Amatic SC', cursive", fontSize: '5em' }}>
                     Dewey
                 </Typography>
             </div>
