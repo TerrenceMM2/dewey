@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../context/contexts/UserContext';
 import { Redirect, Link } from 'react-router-dom';
-import ScannerContainer from '../components/Scanner/ScannerContainer';
 import SearchForm from '../components/Search/SearchForm';
 
 // style imports
@@ -30,13 +29,14 @@ export const Dashboard = () => {
                   style={{
                       padding: 30
                   }}>
-                  {/* <ScannerContainer /> */}
                   <Typography>
                       <Link to="/account" className={classes.link}>
                           Update Account
                       </Link>
                   </Typography>
-                  <Typography variant="h3">Dashboard</Typography>
+                  <Typography variant="h3" gutterBottom>
+                      Dashboard
+                  </Typography>
 
                   <SearchForm />
               </div>

@@ -26,6 +26,7 @@ const useStyles = makeStyles(theme => ({
 const SearchForm = () => {
     const classes = useStyles();
 
+    const [undetectedMessage, setUndetectedMessage] = useState('');
     const [searchType, setSearchType] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [books, setBooks] = useState([]);
@@ -38,7 +39,10 @@ const SearchForm = () => {
         }
 
         if (!result.success) {
-            console.log(result.data);
+            console.log(result);
+            setUndetectedMessage(
+                'Your volume could not be found via scan. Please try a manual search.'
+            );
         } else {
             setSearchType('isbn');
             setSearchTerm(result.codeResult.code);
@@ -51,6 +55,8 @@ const SearchForm = () => {
     };
 
     const handleSearch = async event => {
+        setUndetectedMessage('');
+        setBooks([]);
         try {
             const response = await SendSearch(searchTerm, searchType);
             console.log(searchTerm, searchType);
@@ -104,6 +110,7 @@ const SearchForm = () => {
                 )}
             </FormControl>
 
+            <Typography variant="body1">{undetectedMessage && undetectedMessage}</Typography>
             <Scanner handleDetected={handleDetected} />
 
             {books.length > 0 && (
