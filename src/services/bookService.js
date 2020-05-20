@@ -67,6 +67,7 @@ exports.getBookIsbn = async isbn => {
             );
 
             const items = gbData.data.items[0];
+
             const data = {};
             data.isbn = isbn;
             data.bookName = items.volumeInfo.title;
@@ -78,11 +79,10 @@ exports.getBookIsbn = async isbn => {
 
             // Creates local DB record
             // const book = await db.book.create(data);
-
             return {
                 error: false,
                 statusCode: 201,
-                data
+                data: [data]
             };
         }
 
@@ -138,6 +138,7 @@ exports.getBookAuthor = async author => {
 
                 book.isbn = isbn;
 
+                console.log('BOOK', book);
                 books.push(book);
             }
 

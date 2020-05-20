@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Scanner from './Scanner';
+import Scanner from '../Search/Scanner';
 import Result from './Result';
 
 const ScannerApp = () => {

@@ -12,6 +12,8 @@ import ResultsContainer from './ResultsContainer';
 import { makeStyles } from '@material-ui/core/styles';
 import { SendSearch } from './Action';
 
+import Scanner from './Scanner';
+
 const useStyles = makeStyles(theme => ({
     root: {
         '& > *': {
@@ -28,6 +30,22 @@ const SearchForm = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [books, setBooks] = useState([]);
 
+    const [results, setResults] = useState('');
+
+    const handleDetected = result => {
+        if (!result) {
+            return null;
+        }
+
+        if (!result.success) {
+            console.log(result.data);
+        } else {
+            setSearchType('isbn');
+            setSearchTerm(result.codeResult.code);
+            console.log(result.codeResult.code);
+        }
+    };
+
     const handleChange = event => {
         setSearchType(event.target.value);
     };
@@ -35,6 +53,7 @@ const SearchForm = () => {
     const handleSearch = async event => {
         try {
             const response = await SendSearch(searchTerm, searchType);
+            console.log(searchTerm, searchType);
             setBooks(response.data.data);
         } catch (error) {
             // @TODO: HANDLE ERROR
@@ -84,6 +103,8 @@ const SearchForm = () => {
                     </>
                 )}
             </FormControl>
+
+            <Scanner handleDetected={handleDetected} />
 
             {books.length > 0 && (
                 <Typography variant="body1">Search results: {books.length}</Typography>
