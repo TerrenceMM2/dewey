@@ -1,11 +1,19 @@
-# Book Tracker
+<p align="center"><img width=12.5% src="./docs/dir_assets/avatar.png"></p>
+<p align="center"><img width=50% src="./docs/dir_assets/title.png"></p>
 
-![Website](https://img.shields.io/website?label=AWS%20Deployment&logo=amazon-aws&style=for-the-badge&url=http%3A%2F%2Fbooktracker-env.eba-vxhiqmya.us-east-2.elasticbeanstalk.com%2F)
-![license](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
-![version](https://img.shields.io/badge/version-v0.0.1.alpha-blue?style=for-the-badge)
-![GitHub issues](https://img.shields.io/github/issues/acd37/dewey?label=issues&logo=github&style=for-the-badge)
+<div align="center">
+<img src="https://img.shields.io/website?label=AWS%20Deployment&logo=amazon-aws&style=for-the-badge&url=http%3A%2F%2Fbooktracker-env.eba-vxhiqmya.us-east-2.elasticbeanstalk.com%2F" />
+<img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" />
+<img src="https://img.shields.io/badge/version-v0.0.1.alpha-blue?style=for-the-badge" />
+<img src="https://img.shields.io/github/issues/terrencemm2/dewey?label=issues&logo=github&style=for-the-badge" />
+<img src="https://img.shields.io/npm/v/npm?style=for-the-badge" />
+<img src="https://img.shields.io/github/v/release/terrencemm2/dewey?style=for-the-badge" />
+<img src="https://img.shields.io/github/last-commit/terrencemm2/dewey?style=for-the-badge" />
+</div>
 
-### 🚧 Under Construction 🚧
+<h3 align="center">
+🚧 Under Construction 🚧
+</div>
 
 <hr />
 
@@ -33,8 +41,8 @@ Once you have this available:
 
 1.
 
-- **Option 1**: 🍴 Fork the repository
-- **Option 2**: 👯 Clone the repo with `git clone git@github.com:acd37/dewey.git`
+-   **Option 1**: 🍴 Fork the repository
+-   **Option 2**: 👯 Clone the repo with `git clone git@github.com:acd37/dewey.git`
 
 2. 🤫 Create a `.env` file in the root directory, and include the following information:
 
@@ -76,20 +84,28 @@ You assume full risk by using our code, and are reponsible for securing your own
 
 ### Developers
 
-#### 👨‍💻 Pete Wanca, [@petewanca](https://github.com/petewanca)
-
-- Homepage: [petewanca.github.io](https://petewanca.github.io/)
-- e-mail: petewanca@gmail.com
-- LinkedIn: [linkedin.com/in/petewanca](https://www.linkedin.com/in/petewanca/)
-
-#### 👨‍💻 Terrence Mahnken, [@terrencemm2](https://github.com/TerrenceMM2)
-
-- Homepage: [terrence.codes](https://terrence.codes)
-- e-mail: terrencemm2@gmail.com
-- LinkedIn: [linkedin.com/in/terrencemahnken](https://www.linkedin.com/in/terrencemahnken/)
-
-#### 👨‍💻 Alec Down, [@acd37](https://github.com/acd37)
-
-- Homepage: [alecdown.com](https://alecdown.com)
-- e-mail: alecdown@gmail.com
-- LinkedIn: [https://www.linkedin.com/in/alecdown/](linkedin.com/in/alecdown)
+<table >
+    <tr >
+        <td align="center" style="border: none">
+            <a href="https://petewanca.github.io/" /><img src="https://avatars1.githubusercontent.com/u/31027058?s=460&u=ae1d74cd39ed8c7a9c1698bfae9022d39c35b35c&v=4" width="100px;" style="border-radius: 50%" alt="petewanca"/></a>
+            <br/>
+            <a href="https://github.com/petewanca"><strong>@petewanca</strong></a>
+            <br />
+            <a href="https://www.linkedin.com/in/petewanca/"><img src="./docs/dir_assets/linkedin.png" height="20"></a>
+        </td>
+        <td align="center">
+            <a href="https://terrence.codes" /><img src="https://avatars0.githubusercontent.com/u/25600473?s=460&u=594f9b2404f45bd471ed335d11136f23f6a98460&v=4" width="100px;" style="border-radius: 50%" alt="terrencemm2"/></a>
+             <br/>
+            <a href="https://github.com/terrencemm2"><strong>@terrencemm2</strong></a>
+             <br />
+            <a href="https://www.linkedin.com/in/terrencemahnken/"><img src="./docs/dir_assets/linkedin.png" height="20"></a>
+        </td>
+        <td align="center">
+            <a href="https://alecdown.com" /><img src="https://avatars0.githubusercontent.com/u/25551773?s=460&u=137fc38ea522b4647308b9435c01b119d601d08a&v=4" width="100px;" style="border-radius: 50%" alt="acd37"/></a>
+             <br/>
+            <a href="https://github.com/acd37"><strong>@acd37</strong></a>
+             <br />
+            <a href="https://linkedin.com/in/alecdown"><img src="./docs/dir_assets/linkedin.png" height="20"></a>
+        </td>
+    </tr>
+</table>
