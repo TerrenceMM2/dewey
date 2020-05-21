@@ -2,8 +2,6 @@ import React, { useContext } from 'react';
 import { UserContext } from '../context/contexts/UserContext';
 import { Redirect, Link } from 'react-router-dom';
 import SearchForm from '../components/Search/SearchForm';
-import Navigation from '../components/Navigation/Navigation';
-
 // style imports
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
@@ -26,15 +24,7 @@ export const Dashboard = () => {
 
     auth
         ? (content = (
-              <div
-                  style={{
-                      padding: 30
-                  }}>
-                  <Typography>
-                      <Link to="/account" className={classes.link}>
-                          Update Account
-                      </Link>
-                  </Typography>
+              <div>
                   <Typography variant="h3" gutterBottom>
                       Dashboard
                   </Typography>
