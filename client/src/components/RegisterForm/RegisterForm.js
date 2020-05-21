@@ -58,6 +58,7 @@ export const RegisterForm = () => {
     );
     const [securityThreeQuestion, setSecurityThreeQuestion] = useState('Where were you born?');
     const [registrationStep, setRegistrationStep] = useState(1);
+    const [showPassword, setShowPassword] = useState(false);
 
     const classes = useStyles();
 
@@ -125,7 +126,7 @@ export const RegisterForm = () => {
     };
 
     const renderPasswordDisplay = () => {
-        return password.replace(/./g, '*');
+        return showPassword ? password : password.replace(/./g, '*');
     };
 
     const renderSwitchContent = registrationStep => {
@@ -299,13 +300,29 @@ export const RegisterForm = () => {
                 return (
                     <>
                         <Typography variant="body1">
-                            <strong>Name:</strong> {firstName} {lastName}
+                            <strong>First name:</strong> {firstName}
+                        </Typography>
+                        <Typography variant="body1">
+                            <strong>Last name:</strong> {lastName}
                         </Typography>
                         <Typography variant="body1">
                             <strong>Email:</strong> {email}
                         </Typography>
                         <Typography variant="body1">
                             <strong>Password:</strong> {renderPasswordDisplay()}
+                            <span
+                                style={{
+                                    color: '#5f27cd',
+                                    fontSize: '0.6rem',
+                                    fontWeight: '600',
+                                    textTransform: 'uppercase',
+                                    marginLeft: 10,
+                                    cursor: 'pointer'
+                                }}
+                                onClick={() => setShowPassword(!showPassword)}>
+                                {' '}
+                                {showPassword ? 'hide' : 'show'}{' '}
+                            </span>
                         </Typography>
                         <Typography variant="body1">
                             <strong>{securityOneQuestion}:</strong> {securityOne}
@@ -321,8 +338,8 @@ export const RegisterForm = () => {
                             onClick={() => setRegistrationStep(registrationStep - 1)}>
                             Back
                         </Button>
-                        <Button fullWidth className={classes.submit} type="submit">
-                            Register
+                        <Button fullWidth className={classes.submit} onClick={handleForm}>
+                            Confirm & Register
                         </Button>
                     </>
                 );
@@ -347,11 +364,7 @@ export const RegisterForm = () => {
                             Welcome!
                         </Typography>
 
-                        <form
-                            onSubmit={handleForm}
-                            className={classes.form}
-                            noValidate
-                            autoComplete="off">
+                        <form className={classes.form} noValidate autoComplete="off">
                             {message && <p>{message}</p>}
                             {renderSwitchContent(registrationStep)}
                         </form>
