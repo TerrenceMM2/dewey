@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { UserContext } from '../context/contexts/UserContext';
 import { Redirect, Link } from 'react-router-dom';
 import SearchForm from '../components/Search/SearchForm';
+import Navigation from '../components/Navigation/Navigation';
 
 // style imports
 import { makeStyles } from '@material-ui/core/styles';
@@ -37,7 +38,6 @@ export const Dashboard = () => {
                   <Typography variant="h3" gutterBottom>
                       Dashboard
                   </Typography>
-
                   <SearchForm />
               </div>
           ))
