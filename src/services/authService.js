@@ -1,10 +1,6 @@
 import bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
-import {
-    registerValidation,
-    loginValidation,
-    passwordValidation
-} from '../helpers/validationHelper';
+import { loginValidation, passwordValidation } from '../helpers/validationHelper';
 import db from '../models';
 import { secretOrKey } from '../config/keys';
 
@@ -38,24 +34,13 @@ exports.register = async (req, res, next) => {
         securityQuestion3
     } = req.body;
 
-    console.log(req.body);
-
-    // const { error } = await registerValidation(req.body);
-
-    // if (error)
-    //     return {
-    //         error: true,
-    //         statusCode: 400,
-    //         data: error.details[0].message
-    //     };
-
-    // const emailRegistered = await db.user.findOne({ where: { email } });
-    // if (emailRegistered)
-    //     return {
-    //         error: true,
-    //         statusCode: 400,
-    //         data: 'Email already in use.'
-    //     };
+    const emailRegistered = await db.user.findOne({ where: { email } });
+    if (emailRegistered)
+        return {
+            error: true,
+            statusCode: 400,
+            data: 'Email already in use.'
+        };
 
     const salt = await bcrypt.genSalt();
     const hash = await bcrypt.hash(password, salt);
