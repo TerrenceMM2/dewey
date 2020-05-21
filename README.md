@@ -17,15 +17,19 @@
 
 <hr />
 
-# Live Link
+## Live Link
 
-http://booktracker-env.eba-vxhiqmya.us-east-2.elasticbeanstalk.com/
+deweyreads.com
 
-# About
+## About
 
 _Dewey is a personal library application that allows you to keep track of all books in your collection, add new books by searching via keyword, author or title, as well as scan the bar code of any book using your device's camera._
 
-# The Tech Stuff
+## Screenshot
+
+![Dewey's Login Page](../media/screenshot.png?raw=true)
+
+## The Tech Stuff
 
 **Deployment**: AWS CodeBuild, AWS CodePipeline, AWS Elastic Beanstalk
 
@@ -33,13 +37,13 @@ _Dewey is a personal library application that allows you to keep track of all bo
 
 **Client**: React.js with Hooks & Context
 
-# How to Use
+## How to Use
 
 To use this code, you'll need to have `nodemon` installed globally. Documentation is available at [npmjs.com](https://www.npmjs.com/package/nodemon).
 
 Once you have this available:
 
-1.
+1. Obtain the code
 
 -   **Option 1**: 🍴 Fork the repository
 -   **Option 2**: 👯 Clone the repo with `git clone git@github.com:acd37/dewey.git`
@@ -67,18 +71,18 @@ SECRET_KEY=
 
 You will need your own instance of a local and production MySQL database. Any `SECRET_KEY` will be fine. We encourage strong keys.
 
-2. `cd` into the directory, and `npm install` all server-side packages
-3. `npm run client-install` to install all client-side packages
-4. Launch the app using `npm run dev` and hack away 🔨🔨🔨
-5. 🔃 Create a pull request.
+3. `cd` into the directory, and `npm install` all server-side packages
+4. `npm run client-install` to install all client-side packages
+5. Launch the app using `npm run dev` and hack away 🔨🔨🔨
+6. 🔃 Create a pull request.
 
-# Contributing
+## Contributing
 
 To contribute to this code, initialize a pull request against the `master` branch with any changes you would like to implement.
 
 A member of our development team will review, request changes as needed, and approve if deemed appropriate.
 
-# 🚨 Disclaimer 🚨
+## 🚨 Disclaimer 🚨
 
 You assume full risk by using our code, and are reponsible for securing your own API keys, where applicable.
 
@@ -86,22 +90,22 @@ You assume full risk by using our code, and are reponsible for securing your own
 
 <table >
     <tr >
-        <td align="center" style="border: none">
-            <a href="https://petewanca.github.io/" /><img src="https://avatars1.githubusercontent.com/u/31027058?s=460&u=ae1d74cd39ed8c7a9c1698bfae9022d39c35b35c&v=4" width="100px;" style="border-radius: 50%" alt="petewanca"/></a>
+        <td align="center">
+            <a href="https://petewanca.github.io/" /><img src="https://avatars1.githubusercontent.com/u/31027058?s=460&u=ae1d74cd39ed8c7a9c1698bfae9022d39c35b35c&v=4" width="100" alt="petewanca"/></a>
             <br/>
             <a href="https://github.com/petewanca"><strong>@petewanca</strong></a>
             <br />
             <a href="https://www.linkedin.com/in/petewanca/"><img src="./docs/dir_assets/linkedin.png" height="20"></a>
         </td>
         <td align="center">
-            <a href="https://terrence.codes" /><img src="https://avatars0.githubusercontent.com/u/25600473?s=460&u=594f9b2404f45bd471ed335d11136f23f6a98460&v=4" width="100px;" style="border-radius: 50%" alt="terrencemm2"/></a>
+            <a href="https://terrence.codes" /><img src="https://avatars0.githubusercontent.com/u/25600473?s=460&u=594f9b2404f45bd471ed335d11136f23f6a98460&v=4" width="100" alt="terrencemm2"/></a>
              <br/>
             <a href="https://github.com/terrencemm2"><strong>@terrencemm2</strong></a>
              <br />
             <a href="https://www.linkedin.com/in/terrencemahnken/"><img src="./docs/dir_assets/linkedin.png" height="20"></a>
         </td>
         <td align="center">
-            <a href="https://alecdown.com" /><img src="https://avatars0.githubusercontent.com/u/25551773?s=460&u=137fc38ea522b4647308b9435c01b119d601d08a&v=4" width="100px;" style="border-radius: 50%" alt="acd37"/></a>
+            <a href="https://alecdown.com" /><img src="https://avatars0.githubusercontent.com/u/25551773?s=460&u=137fc38ea522b4647308b9435c01b119d601d08a&v=4" width="100" alt="acd37"/></a>
              <br/>
             <a href="https://github.com/acd37"><strong>@acd37</strong></a>
              <br />
