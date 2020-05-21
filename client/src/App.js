@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './App.css';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
@@ -10,8 +10,11 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Footer from './components/Footer';
 import { PrivateRoute } from './utils/PrivateRoute';
 import Navigation from './components/Navigation/Navigation';
+import { UserContext } from './context/contexts/UserContext';
 
 const App = () => {
+    const { user } = useContext(UserContext);
+
     return (
         <div className="App">
             <Router>
@@ -33,7 +36,7 @@ const App = () => {
                         <Route exact component={NoMatch} />
                     </Switch>
                 </div>
-                <Navigation />
+                {user.loggedIn && <Navigation />}
             </Router>
             <Footer />
         </div>
