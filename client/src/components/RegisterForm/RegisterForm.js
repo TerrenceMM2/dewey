@@ -113,7 +113,19 @@ export const RegisterForm = () => {
     };
 
     const handleStepThree = () => {
-        setRegistrationStep(registrationStep + 1);
+        if (!securityOne) {
+            alert('no answer 1');
+        } else if (!securityTwo) {
+            alert('no answer 2');
+        } else if (!securityThree) {
+            alert('no answer 3');
+        } else {
+            setRegistrationStep(registrationStep + 1);
+        }
+    };
+
+    const renderPasswordDisplay = () => {
+        return password.replace(/./g, '*');
     };
 
     const renderSwitchContent = registrationStep => {
@@ -287,13 +299,23 @@ export const RegisterForm = () => {
                 return (
                     <>
                         <Typography variant="body1">
-                            Name: {firstName} {lastName}
+                            <strong>Name:</strong> {firstName} {lastName}
                         </Typography>
-                        <Typography variant="body1">Email: {email}</Typography>
-                        <Typography variant="body1">Password: {password}</Typography>
-                        <Typography variant="body1">Question #1: {securityTwo}</Typography>
-                        <Typography variant="body1">Question #2: {securityTwo}</Typography>
-                        <Typography variant="body1">Question #3: {securityThree}</Typography>
+                        <Typography variant="body1">
+                            <strong>Email:</strong> {email}
+                        </Typography>
+                        <Typography variant="body1">
+                            <strong>Password:</strong> {renderPasswordDisplay()}
+                        </Typography>
+                        <Typography variant="body1">
+                            <strong>{securityOneQuestion}:</strong> {securityOne}
+                        </Typography>
+                        <Typography variant="body1">
+                            <strong>{securityTwoQuestion}:</strong> {securityTwo}
+                        </Typography>
+                        <Typography variant="body1">
+                            <strong>{securityThreeQuestion}:</strong> {securityThree}
+                        </Typography>
                         <Button
                             className={classes.submit}
                             onClick={() => setRegistrationStep(registrationStep - 1)}>
