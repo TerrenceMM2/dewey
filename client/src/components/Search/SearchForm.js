@@ -18,7 +18,12 @@ const useStyles = makeStyles(theme => ({
     root: {
         '& > *': {
             width: '100%',
-            margin: theme.spacing(0, 0, 2, 0)
+            margin: theme.spacing(0, 2, 2, 0)
+        }
+    },
+    '@media (min-width: 768px)': {
+        largeForm: {
+            width: 300
         }
     }
 }));
@@ -79,7 +84,7 @@ const SearchForm = () => {
                 style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                 <InputLabel id="search-type">Search type</InputLabel>
                 <Select
-                    // style={{ width: '100%' }}
+                    className={classes.largeForm}
                     label="Search type"
                     labelId="search-type"
                     id="search-type"
@@ -100,12 +105,9 @@ const SearchForm = () => {
                             color="secondary"
                             onChange={e => setSearchTerm(e.target.value)}
                             value={searchTerm}
-                            // style={{ width: '100%' }}
+                            className={classes.largeForm}
                         />
-                        <Button
-                            // style={{ width: '100%' }}
-                            className={classes.submit}
-                            onClick={handleSearch}>
+                        <Button className={classes.largeForm} onClick={handleSearch}>
                             Search
                         </Button>
                     </>
