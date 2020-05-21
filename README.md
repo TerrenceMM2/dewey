@@ -19,7 +19,7 @@
 
 ## Live Link
 
-deweyreads.com
+[deweyreads.com](http://deweyreads.com)
 
 ## About
 
@@ -27,7 +27,7 @@ _Dewey is a personal library application that allows you to keep track of all bo
 
 ## Screenshot
 
-![Dewey's Login Page](../media/screenshot.png?raw=true)
+![Dewey's Login Page](../media/mobile-screenshot.png?raw=true)
 
 ## The Tech Stuff
 
