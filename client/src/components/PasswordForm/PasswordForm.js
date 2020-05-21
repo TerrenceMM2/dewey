@@ -11,12 +11,6 @@ const useStyles = makeStyles(theme => ({
         textDecoration: 'none',
         color: theme.palette.secondary.main
     },
-    paper: {
-        margin: theme.spacing(3),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
-    },
     avatar: {
         margin: theme.spacing(1),
         backgroundColor: theme.palette.primary.main
@@ -77,10 +71,10 @@ export const PasswordForm = props => {
     };
 
     content = (
-        <Grid container component="main" justify="center">
+        <Grid container component="main">
             <Grid item xs={12} sm={8} md={4}>
-                <div className={classes.paper}>
-                    <Typography variant="h5" gutterBottom style={{ textAlign: 'center' }}>
+                <div>
+                    <Typography variant="h5" gutterBottom style={{ textAlign: 'left' }}>
                         Update Password
                     </Typography>
                     <form

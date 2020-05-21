@@ -3,6 +3,7 @@ import { UserContext } from '../context/contexts/UserContext';
 import { Redirect, Link } from 'react-router-dom';
 import ScannerContainer from '../components/Scanner/ScannerContainer';
 import SearchForm from '../components/Search/SearchForm';
+import Navigation from '../components/Navigation/Navigation';
 
 // style imports
 import { makeStyles } from '@material-ui/core/styles';
@@ -26,18 +27,9 @@ export const Dashboard = () => {
 
     auth
         ? (content = (
-              <div
-                  style={{
-                      padding: 30
-                  }}>
+              <div>
                   {/* <ScannerContainer /> */}
-                  <Typography>
-                      <Link to="/account" className={classes.link}>
-                          Update Account
-                      </Link>
-                  </Typography>
                   <Typography variant="h3">Dashboard</Typography>
-
                   <SearchForm />
               </div>
           ))
