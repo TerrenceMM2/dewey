@@ -5,6 +5,11 @@ import { SendRegister } from './Action';
 import Select from '@material-ui/core/Select';
 
 import PasswordStrengthBar from 'react-password-strength-bar';
+import {
+    validateRegistrationStepOne,
+    validateRegistrationStepTwo,
+    validateRegistrationStepThree
+} from '../../utils/deweysToolkit';
 
 // style imports
 import { makeStyles } from '@material-ui/core/styles';
@@ -49,16 +54,17 @@ export const RegisterForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [match, setMatch] = useState('');
-    const [securityOne, setSecurityOne] = useState('');
-    const [securityTwo, setSecurityTwo] = useState('');
-    const [securityThree, setSecurityThree] = useState('');
-    const [securityOneQuestion, setSecurityOneQuestion] = useState('What is your favorite book?');
-    const [securityTwoQuestion, setSecurityTwoQuestion] = useState(
+    const [securityAnswer1, setSecurityAnswer1] = useState('');
+    const [securityAnswer2, setSecurityAnswer2] = useState('');
+    const [securityAnswer3, setSecurityAnswer3] = useState('');
+    const [securityQuestion1, setSecurityQuestion1] = useState('What is your favorite book?');
+    const [securityQuestion2, setSecurityQuestion2] = useState(
         'What was the name of your first pet?'
     );
-    const [securityThreeQuestion, setSecurityThreeQuestion] = useState('Where were you born?');
+    const [securityQuestion3, setSecurityQuestion3] = useState('Where were you born?');
     const [registrationStep, setRegistrationStep] = useState(1);
     const [showPassword, setShowPassword] = useState(false);
+    const [validationErrors, setValidationErrors] = useState({});
 
     const classes = useStyles();
 
@@ -69,58 +75,61 @@ export const RegisterForm = () => {
 
     const handleForm = async e => {
         e.preventDefault();
-
-        if (password === match) {
-            try {
-                const response = await SendRegister(firstName, lastName, email, password);
-                dispatch({ type: 'REGISTER_SUCCESS', payload: { message: response.data.data } });
-            } catch (error) {
-                dispatch({
-                    type: 'REGISTER_FAILURE',
-                    payload: { message: error.response.data.data }
-                });
-                setPassword('');
-                setMatch('');
-            }
-        } else {
-            dispatch({ type: 'REGISTER_FAILURE', payload: { message: "Passwords don't match." } });
-            setPassword('');
-            setMatch('');
+        try {
+            const response = await SendRegister(
+                firstName,
+                lastName,
+                email,
+                password,
+                securityAnswer1,
+                securityAnswer2,
+                securityAnswer3,
+                securityQuestion1,
+                securityQuestion2,
+                securityQuestion3
+            );
+            dispatch({ type: 'REGISTER_SUCCESS', payload: { message: response.data.data } });
+        } catch (error) {
+            dispatch({
+                type: 'REGISTER_FAILURE',
+                payload: { message: error.response.data.data }
+            });
         }
     };
 
-    const handleStepOne = () => {
-        if (!firstName) {
-            alert('no firstname');
-        } else if (!lastName) {
-            alert('no lastname');
-        } else if (!email) {
-            alert('no email');
+    const handleStepOne = async () => {
+        const res = await validateRegistrationStepOne(firstName, lastName, email);
+
+        if (!res.isValid) {
+            setValidationErrors(res.errors);
         } else {
+            setValidationErrors({});
             setRegistrationStep(registrationStep + 1);
         }
     };
 
-    const handleStepTwo = () => {
-        if (!password) {
-            alert('no password');
-        } else if (!match) {
-            alert('no match');
-        } else if (password !== match) {
-            alert('pwds dont match');
+    const handleStepTwo = async () => {
+        const res = await validateRegistrationStepTwo(password, match);
+
+        if (!res.isValid) {
+            setValidationErrors(res.errors);
         } else {
+            setValidationErrors({});
             setRegistrationStep(registrationStep + 1);
         }
     };
 
-    const handleStepThree = () => {
-        if (!securityOne) {
-            alert('no answer 1');
-        } else if (!securityTwo) {
-            alert('no answer 2');
-        } else if (!securityThree) {
-            alert('no answer 3');
+    const handleStepThree = async () => {
+        const res = await validateRegistrationStepThree(
+            securityAnswer1,
+            securityAnswer2,
+            securityAnswer3
+        );
+
+        if (!res.isValid) {
+            setValidationErrors(res.errors);
         } else {
+            setValidationErrors({});
             setRegistrationStep(registrationStep + 1);
         }
     };
@@ -138,6 +147,8 @@ export const RegisterForm = () => {
                             Enter your details below to get started.
                         </Typography>
                         <TextField
+                            error={validationErrors.firstName}
+                            helperText={validationErrors.firstName && validationErrors.firstName}
                             required
                             fullWidth
                             autoFocus
@@ -150,6 +161,8 @@ export const RegisterForm = () => {
                             onChange={e => setFirstName(e.target.value)}
                         />
                         <TextField
+                            error={validationErrors.lastName}
+                            helperText={validationErrors.lastName && validationErrors.lastName}
                             required
                             fullWidth
                             margin="normal"
@@ -161,6 +174,8 @@ export const RegisterForm = () => {
                             onChange={e => setLastName(e.target.value)}
                         />
                         <TextField
+                            error={validationErrors.email}
+                            helperText={validationErrors.email && validationErrors.email}
                             required
                             fullWidth
                             margin="normal"
@@ -189,6 +204,8 @@ export const RegisterForm = () => {
                 return (
                     <>
                         <TextField
+                            error={validationErrors.password}
+                            helperText={validationErrors.password && validationErrors.password}
                             required
                             fullWidth
                             margin="normal"
@@ -211,10 +228,8 @@ export const RegisterForm = () => {
                             shortScoreWord="Password strength: Dewey doesn't like it!"
                         />
                         <TextField
-                            error={match !== password && match !== ''}
-                            helperText={
-                                match !== password && match !== '' && 'Passwords do not match.'
-                            }
+                            error={validationErrors.match}
+                            helperText={validationErrors.match && validationErrors.match}
                             required
                             fullWidth
                             margin="normal"
@@ -239,13 +254,17 @@ export const RegisterForm = () => {
             case 3:
                 return (
                     <>
-                        <Typography variant="subtitle" gutterBottom>
+                        <Typography variant="subtitle1" gutterBottom>
                             Dewey likes to keep things secure, and he'll help you get a new password
                             if you forget it. Go ahead and tell him the answers to the following
                             questions.
                         </Typography>
-                        <Typography variant="body1">{securityOneQuestion}</Typography>
+                        <Typography variant="body1">{securityQuestion1}</Typography>
                         <TextField
+                            error={validationErrors.securityAnswer1}
+                            helperText={
+                                validationErrors.securityAnswer1 && validationErrors.securityAnswer1
+                            }
                             required
                             fullWidth
                             margin="normal"
@@ -253,13 +272,17 @@ export const RegisterForm = () => {
                             variant="outlined"
                             type="text"
                             label="Security Question #1"
-                            value={securityOne}
-                            onChange={e => setSecurityOne(e.target.value)}
+                            value={securityAnswer1}
+                            onChange={e => setSecurityAnswer1(e.target.value)}
                             style={{ marginBottom: 20 }}
                         />
 
-                        <Typography variant="body1">{securityTwoQuestion}</Typography>
+                        <Typography variant="body1">{securityQuestion2}</Typography>
                         <TextField
+                            error={validationErrors.securityAnswer2}
+                            helperText={
+                                validationErrors.securityAnswer2 && validationErrors.securityAnswer2
+                            }
                             required
                             fullWidth
                             margin="normal"
@@ -267,13 +290,17 @@ export const RegisterForm = () => {
                             variant="outlined"
                             type="text"
                             label="Security Question #2"
-                            value={securityTwo}
-                            onChange={e => setSecurityTwo(e.target.value)}
+                            value={securityAnswer2}
+                            onChange={e => setSecurityAnswer2(e.target.value)}
                             style={{ marginBottom: 20 }}
                         />
 
-                        <Typography variant="body1">{securityThreeQuestion}</Typography>
+                        <Typography variant="body1">{securityQuestion3}</Typography>
                         <TextField
+                            error={validationErrors.securityAnswer3}
+                            helperText={
+                                validationErrors.securityAnswer3 && validationErrors.securityAnswer3
+                            }
                             required
                             fullWidth
                             margin="normal"
@@ -281,8 +308,8 @@ export const RegisterForm = () => {
                             variant="outlined"
                             type="text"
                             label="Security Question #3"
-                            value={securityThree}
-                            onChange={e => setSecurityThree(e.target.value)}
+                            value={securityAnswer3}
+                            onChange={e => setSecurityAnswer3(e.target.value)}
                             style={{ marginBottom: 20 }}
                         />
                         <Button
@@ -299,6 +326,9 @@ export const RegisterForm = () => {
             case 4:
                 return (
                     <>
+                        <Typography variant="subtitle1" gutterBottom>
+                            Roarrr! I think we're ready to get started.
+                        </Typography>
                         <Typography variant="body1">
                             <strong>First name:</strong> {firstName}
                         </Typography>
@@ -325,21 +355,22 @@ export const RegisterForm = () => {
                             </span>
                         </Typography>
                         <Typography variant="body1">
-                            <strong>{securityOneQuestion}:</strong> {securityOne}
+                            <strong>{securityQuestion1}:</strong> {securityAnswer1}
                         </Typography>
                         <Typography variant="body1">
-                            <strong>{securityTwoQuestion}:</strong> {securityTwo}
+                            <strong>{securityQuestion2}:</strong> {securityAnswer2}
                         </Typography>
                         <Typography variant="body1">
-                            <strong>{securityThreeQuestion}:</strong> {securityThree}
+                            <strong>{securityQuestion3}:</strong> {securityAnswer3}
                         </Typography>
+
+                        <Button fullWidth className={classes.submit} onClick={handleForm}>
+                            Confirm & Register
+                        </Button>
                         <Button
                             className={classes.submit}
                             onClick={() => setRegistrationStep(registrationStep - 1)}>
                             Back
-                        </Button>
-                        <Button fullWidth className={classes.submit} onClick={handleForm}>
-                            Confirm & Register
                         </Button>
                     </>
                 );

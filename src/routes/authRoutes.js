@@ -24,6 +24,10 @@ router.get(
     AuthController.validate
 );
 
+// @route GET api/auth/email
+// @desc checks if an email is in use
+router.get('/api/auth/email/:email', AuthController.checkEmail);
+
 // @route PATCH api/auth/password
 // @desc updates password from protected form
 router.patch(

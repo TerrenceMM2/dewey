@@ -15,6 +15,30 @@ module.exports = function (sequelize, Sequelize) {
             type: Sequelize.STRING,
             allowNull: false
         },
+        securityQuestion1: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        securityAnswer1: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        securityQuestion2: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        securityAnswer2: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        securityQuestion3: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        securityAnswer3: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
         password: {
             type: Sequelize.STRING,
             allowNull: false
