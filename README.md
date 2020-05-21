@@ -19,7 +19,7 @@
 
 ## Live Link
 
-deweyreads.com
+[deweyreads.com](http://deweyreads.com)
 
 ## About
 
