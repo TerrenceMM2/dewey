@@ -6,7 +6,10 @@ module.exports = {
             firstName: joi.string().min(2).required(),
             lastName: joi.string().min(2).required(),
             email: joi.string().email().min(6).required(),
-            password: joi.string().min(6).required()
+            password: joi.string().min(6).required(),
+            securityAnswer1: joi.string().required(),
+            securityAnswer2: joi.string().required(),
+            securityAnswer3: joi.string().required()
         });
         return schema.validate(data);
     },

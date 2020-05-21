@@ -1,10 +1,6 @@
 import bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
-import {
-    registerValidation,
-    loginValidation,
-    passwordValidation
-} from '../helpers/validationHelper';
+import { loginValidation, passwordValidation } from '../helpers/validationHelper';
 import db from '../models';
 import { secretOrKey } from '../config/keys';
 
@@ -25,15 +21,18 @@ exports.test = async query => {
 };
 
 exports.register = async (req, res, next) => {
-    const { firstName, lastName, email, password } = req.body;
-
-    const { error } = await registerValidation(req.body);
-    if (error)
-        return {
-            error: true,
-            statusCode: 400,
-            data: error.details[0].message
-        };
+    const {
+        firstName,
+        lastName,
+        email,
+        password,
+        securityAnswer1,
+        securityAnswer2,
+        securityAnswer3,
+        securityQuestion1,
+        securityQuestion2,
+        securityQuestion3
+    } = req.body;
 
     const emailRegistered = await db.user.findOne({ where: { email } });
     if (emailRegistered)
@@ -50,7 +49,13 @@ exports.register = async (req, res, next) => {
         firstName,
         lastName,
         email,
-        password: hash
+        password: hash,
+        securityAnswer1,
+        securityAnswer2,
+        securityAnswer3,
+        securityQuestion1,
+        securityQuestion2,
+        securityQuestion3
     };
 
     try {
@@ -106,6 +111,25 @@ exports.login = async (req, res, next) => {
         error: false,
         statusCode: 200,
         token: `Bearer ${token}`
+    };
+};
+
+exports.checkEmail = async (req, res, next) => {
+    const { email } = req.params;
+
+    const emailRegistered = await db.user.findOne({ where: { email } });
+
+    if (emailRegistered) {
+        return {
+            error: false,
+            statusCode: 200,
+            isUsed: true
+        };
+    }
+    return {
+        error: false,
+        statusCode: 200,
+        isUsed: false
     };
 };
 
