@@ -1,6 +1,7 @@
 import validator from 'validator';
 import axios from 'axios';
 
+// this function is used to truncate long string values
 export const truncate = (value, length) => {
     if (!value) {
         return;
@@ -13,6 +14,7 @@ export const truncate = (value, length) => {
     return value.slice(0, length) + '...';
 };
 
+// this function checks whether data types are empty
 export const isEmpty = value => {
     return (
         value === undefined ||
@@ -22,6 +24,7 @@ export const isEmpty = value => {
     );
 };
 
+// this function uses `validator` against inputs for registration step 1
 export const validateRegistrationStepOne = async (firstName, lastName, email) => {
     let errors = {};
 
@@ -57,6 +60,8 @@ export const validateRegistrationStepOne = async (firstName, lastName, email) =>
         errors
     };
 };
+
+// this function uses `validator` against inputs for registration step 2
 export const validateRegistrationStepTwo = (password, match) => {
     let errors = {};
 
@@ -82,6 +87,7 @@ export const validateRegistrationStepTwo = (password, match) => {
     };
 };
 
+// this function uses `validator` against inputs for registration step 3
 export const validateRegistrationStepThree = (
     securityAnswer1,
     securityAnswer2,

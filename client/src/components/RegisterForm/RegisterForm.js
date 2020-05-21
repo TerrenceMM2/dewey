@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { UserContext } from '../../context/contexts/UserContext';
 import { SendRegister } from './Action';
-import Select from '@material-ui/core/Select';
 
 import PasswordStrengthBar from 'react-password-strength-bar';
 import {
@@ -138,8 +137,10 @@ export const RegisterForm = () => {
         return showPassword ? password : password.replace(/./g, '*');
     };
 
+    // switch statement to display registration steps
     const renderSwitchContent = registrationStep => {
         switch (registrationStep) {
+            // STEP ONE
             case 1:
                 return (
                     <>
@@ -200,6 +201,8 @@ export const RegisterForm = () => {
                         </Typography>
                     </>
                 );
+
+            // STEP TWO
             case 2:
                 return (
                     <>
@@ -251,6 +254,8 @@ export const RegisterForm = () => {
                         </Button>
                     </>
                 );
+
+            // STEP THREE
             case 3:
                 return (
                     <>
@@ -323,6 +328,8 @@ export const RegisterForm = () => {
                         </Button>
                     </>
                 );
+
+            // STEP FOUR
             case 4:
                 return (
                     <>
