@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import { UserContext } from '../../context/contexts/UserContext';
+
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeIcon from '@material-ui/icons/Home';
 import BookIcon from '@material-ui/icons/MenuBook';
 import SettingsIcon from '@material-ui/icons/Settings';
 import LogoutIcon from '@material-ui/icons/ExitToApp';
-import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
     root: {
@@ -20,7 +21,17 @@ const useStyles = makeStyles({
 const Navigation = () => {
     const classes = useStyles();
     const history = useHistory();
+    const { user, dispatch } = useContext(UserContext);
     const [value, setValue] = React.useState(0);
+
+    const handleLogout = () => {
+        try {
+            dispatch({ type: 'LOGOUT', payload: {} });
+            localStorage.removeItem('token');
+        } catch (error) {
+            console.log('Logout error', error);
+        }
+    };
 
     return (
         <BottomNavigation
@@ -46,7 +57,7 @@ const Navigation = () => {
                 icon={<SettingsIcon />}
             />
 
-            <BottomNavigationAction label="Logout" icon={<LogoutIcon />} />
+            <BottomNavigationAction label="Logout" icon={<LogoutIcon />} onClick={handleLogout} />
         </BottomNavigation>
     );
 };
