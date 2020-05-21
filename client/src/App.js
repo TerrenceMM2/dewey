@@ -18,15 +18,7 @@ const App = () => {
     return (
         <div className="App">
             <Router>
-                <div
-                    style={{
-                        padding: 30,
-                        paddingBottom: 10,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
-                        height: 'calc(100vh - 126px)'
-                    }}>
+                <div style={{ padding: 10 }}>
                     <Switch>
                         <Route exact path="/" component={Login} />
                         <Route exact path="/register" component={Register} />
@@ -36,9 +28,10 @@ const App = () => {
                         <Route exact component={NoMatch} />
                     </Switch>
                 </div>
-                {user.loggedIn && <Navigation />}
+
+                {/* {user.loggedIn && <Navigation />} */}
+                <Footer />
             </Router>
-            <Footer />
         </div>
     );
 };
