@@ -28,8 +28,6 @@ const App = () => {
                         <Route exact component={NoMatch} />
                     </Switch>
                 </div>
-
-                {/* {user.loggedIn && <Navigation />} */}
                 <Footer />
             </Router>
         </div>
