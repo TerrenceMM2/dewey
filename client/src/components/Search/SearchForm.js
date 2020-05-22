@@ -17,8 +17,13 @@ import Scanner from './Scanner';
 const useStyles = makeStyles(theme => ({
     root: {
         '& > *': {
-            width: '25ch',
-            margin: theme.spacing(0, 2, 0, 0)
+            width: '100%',
+            margin: theme.spacing(0, 2, 2, 0)
+        }
+    },
+    '@media (min-width: 768px)': {
+        largeForm: {
+            width: 300
         }
     }
 }));
@@ -68,7 +73,7 @@ const SearchForm = () => {
     };
 
     return (
-        <div className={classes.searchWrapper}>
+        <div>
             <FormControl
                 fullWidth
                 className={classes.root}
@@ -79,6 +84,7 @@ const SearchForm = () => {
                 style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                 <InputLabel id="search-type">Search type</InputLabel>
                 <Select
+                    className={classes.largeForm}
                     label="Search type"
                     labelId="search-type"
                     id="search-type"
@@ -92,18 +98,16 @@ const SearchForm = () => {
                 {searchType !== '' && (
                     <>
                         <TextField
+                            fullWidth
                             id="outlined-basic"
                             label="Search"
                             variant="outlined"
                             color="secondary"
                             onChange={e => setSearchTerm(e.target.value)}
                             value={searchTerm}
-                            style={{
-                                width: 500,
-                                maxWidth: '90%'
-                            }}
+                            className={classes.largeForm}
                         />
-                        <Button className={classes.submit} onClick={handleSearch}>
+                        <Button className={classes.largeForm} onClick={handleSearch}>
                             Search
                         </Button>
                     </>

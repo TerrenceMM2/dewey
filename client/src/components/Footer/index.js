@@ -18,11 +18,12 @@ const Footer = () => {
                 style={{
                     display: 'flex',
                     flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    flexWrap: 'wrap',
                     backgroundColor: '#5f27cd',
                     color: '#fff',
-                    padding: '5px 30px',
-                    justifyContent: 'space-between',
-                    alignItems: 'center'
+                    padding: '5px 30px'
                 }}>
                 <div>
                     <Typography
