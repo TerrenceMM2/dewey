@@ -9,7 +9,6 @@ import { NoMatch } from './pages/NoMatch';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Footer from './components/Footer';
 import { PrivateRoute } from './utils/PrivateRoute';
-import Navigation from './components/Navigation/Navigation';
 import { UserContext } from './context/contexts/UserContext';
 
 const App = () => {

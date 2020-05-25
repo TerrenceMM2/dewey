@@ -7,9 +7,15 @@ export const UserReducer = (state, action) => {
             return { loggedIn: false, message: action.payload.message };
 
         case 'LOGIN_SUCCESS':
-            const token = action.payload.token.split(' ')[1];
+            const token = action.payload.user.token.split(' ')[1];
+            const { firstName, lastName, email } = action.payload.user;
             localStorage.setItem('token', token);
-            return { loggedIn: true };
+            return {
+                loggedIn: true,
+                firstName,
+                lastName,
+                email
+            };
 
         case 'LOGIN_FAILURE':
             return { loggedIn: false, message: action.payload.message };
@@ -27,10 +33,10 @@ export const UserReducer = (state, action) => {
 
         case 'UPDATE_PASSWORD_SUCCESS':
             console.log(action.payload);
-            return { loggedIn: true, updatedPwd: true, message: action.payload.message };
+            return { ...state, updatedPwd: true, message: action.payload.message };
 
         case 'UPDATE_PASSWORD_FAILURE':
-            return { loggedIn: true, updatedPwd: false, message: action.payload.message };
+            return { ...state, updatedPwd: false, message: action.payload.message };
 
         default:
             return state;

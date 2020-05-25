@@ -103,6 +103,8 @@ exports.login = async (req, res, next) => {
 
     const payload = {
         id: userFound.id,
+        firstName: userFound.firstName,
+        lastName: userFound.lastName,
         email: userFound.email
     };
     const token = await jwt.sign(payload, secretOrKey, { expiresIn: '1hr' });
@@ -110,6 +112,9 @@ exports.login = async (req, res, next) => {
     return {
         error: false,
         statusCode: 200,
+        firstName: userFound.firstName,
+        lastName: userFound.lastName,
+        email: userFound.email,
         token: `Bearer ${token}`
     };
 };

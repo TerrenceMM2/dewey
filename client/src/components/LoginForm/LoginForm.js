@@ -49,7 +49,8 @@ export const LoginForm = () => {
 
         try {
             const response = await SendLogin(email, password);
-            dispatch({ type: 'LOGIN_SUCCESS', payload: { token: response.data.token } });
+
+            dispatch({ type: 'LOGIN_SUCCESS', payload: { user: response.data } });
             setAuthToken(localStorage.token);
         } catch (error) {
             dispatch({ type: 'LOGIN_FAILURE', payload: { message: error.response.data.data } });
