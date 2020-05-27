@@ -6,6 +6,7 @@ import { Dashboard } from './pages/Dashboard';
 import { Account } from './pages/Account';
 import { Library } from './pages/Library';
 import { NoMatch } from './pages/NoMatch';
+import { Forgot } from './pages/ForgotPassword';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Footer from './components/Footer';
 import { PrivateRoute } from './utils/PrivateRoute';
@@ -24,6 +25,7 @@ const App = () => {
                         <PrivateRoute exact path="/dashboard" component={Dashboard} />
                         <PrivateRoute exact path="/library" component={Library} />
                         <PrivateRoute exact path="/account" component={Account} />
+                        <Route exact path="/forgotPassword" component={Forgot} />
                         <Route exact component={NoMatch} />
                     </Switch>
                 </div>
