@@ -225,7 +225,7 @@ exports.forgotPassword = async (req, res, next) => {
             from: 'admin@deweyreads.com',
             to: email,
             subject: 'Link To Reset Password',
-            text: `Reset password link: https://${process.env.APP_HOST}/reset/${token}`
+            text: `Reset password link: ${process.env.APP_HOST}/reset/${token}`
         };
 
         transporter.sendMail(mailOptions, (error, response) => {
@@ -245,13 +245,10 @@ exports.forgotPassword = async (req, res, next) => {
             msg: 'Reset email sent.'
         };
     } catch (error) {
-        console.log(error);
         return {
             error: true,
             statusCode: 400,
             error
         };
     }
-
-    // return await checkEmail(email);
 };

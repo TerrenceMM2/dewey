@@ -59,7 +59,6 @@ exports.forgotPassword = async (req, res, next) => {
         const response = await AuthService.forgotPassword(req, res, next);
         return res.status(response.statusCode).json(response);
     } catch (error) {
-        console.log('controller error', error);
         return res.status(error.statusCode).json(error);
     }
 };
