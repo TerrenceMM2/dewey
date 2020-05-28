@@ -1,8 +1,10 @@
 import bcrypt from 'bcryptjs';
+import crypto from 'crypto';
 import * as jwt from 'jsonwebtoken';
-import { loginValidation, passwordValidation } from '../helpers/validationHelper';
+import { loginValidation, passwordValidation, emailValidation } from '../helpers/validationHelper';
 import db from '../models';
 import { secretOrKey } from '../config/keys';
+import { transporter } from '../config/nodemailer';
 
 exports.test = async query => {
     try {
@@ -18,6 +20,37 @@ exports.test = async query => {
             errors
         };
     }
+};
+
+// UTILITY
+// Checks if email exists in the database.
+exports.checkEmail = async (req, res, next) => {
+    const { email } = req.params;
+
+    const emailRegistered = await db.user.findOne({ where: { email } });
+
+    if (emailRegistered) {
+        return {
+            error: false,
+            statusCode: 200,
+            isUsed: true
+        };
+    }
+    return {
+        error: false,
+        statusCode: 200,
+        isUsed: false
+    };
+};
+
+// UTILITY
+// Checks if user has a valid token.
+exports.validate = async (req, res, next) => {
+    return {
+        error: false,
+        statusCode: 200,
+        data: 'Authorized'
+    };
 };
 
 exports.register = async (req, res, next) => {
@@ -119,33 +152,6 @@ exports.login = async (req, res, next) => {
     };
 };
 
-exports.checkEmail = async (req, res, next) => {
-    const { email } = req.params;
-
-    const emailRegistered = await db.user.findOne({ where: { email } });
-
-    if (emailRegistered) {
-        return {
-            error: false,
-            statusCode: 200,
-            isUsed: true
-        };
-    }
-    return {
-        error: false,
-        statusCode: 200,
-        isUsed: false
-    };
-};
-
-exports.validate = async (req, res, next) => {
-    return {
-        error: false,
-        statusCode: 200,
-        data: 'Authorized'
-    };
-};
-
 exports.updatePassword = async (req, res, next) => {
     const userId = req.user.id;
     const { password } = req.body;
@@ -178,4 +184,74 @@ exports.updatePassword = async (req, res, next) => {
             error
         };
     }
+};
+
+exports.forgotPassword = async (req, res, next) => {
+    const { email } = req.body;
+
+    const { error } = await emailValidation(req.body);
+
+    if (error) {
+        return {
+            error: true,
+            statusCode: 400,
+            data: error.details[0].message
+        };
+    }
+
+    const emailRegistered = await db.user.findOne({ where: { email } });
+
+    if (!emailRegistered) {
+        return {
+            error: false,
+            statusCode: 200,
+            isUsed: false,
+            msg: 'Email not found.'
+        };
+    }
+
+    try {
+        const token = crypto.randomBytes(20).toString('hex');
+
+        db.user.update(
+            {
+                resetPasswordToken: token,
+                resetPasswordExpires: Date.now() + 360000
+            },
+            { where: { id: emailRegistered.dataValues.id } }
+        );
+
+        const mailOptions = {
+            from: 'admin@deweyreads.com',
+            to: email,
+            subject: 'Link To Reset Password',
+            text: `Reset password link: https://${process.env.APP_HOST}/reset/${token}`
+        };
+
+        transporter.sendMail(mailOptions, (error, response) => {
+            if (error) {
+                return {
+                    error: true,
+                    statusCode: 400,
+                    error,
+                    msg: 'There was an issue sending the reset email'
+                };
+            }
+        });
+
+        return {
+            error: false,
+            statusCode: 200,
+            msg: 'Reset email sent.'
+        };
+    } catch (error) {
+        console.log(error);
+        return {
+            error: true,
+            statusCode: 400,
+            error
+        };
+    }
+
+    // return await checkEmail(email);
 };

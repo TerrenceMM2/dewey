@@ -44,7 +44,7 @@ export const ForgotForm = () => {
         e.preventDefault();
 
         //     try {
-        //         const response = await SendLogin(email, password);
+        //         const response = await SendEmail(email);
 
         //         dispatch({ type: 'LOGIN_SUCCESS', payload: { user: response.data } });
         //         setAuthToken(localStorage.token);
