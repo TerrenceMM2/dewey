@@ -114,6 +114,13 @@ export const validateRegistrationStepThree = (
 };
 
 // validates reset page token
-export const validateResetToken = async () => {
-    await axios;
+export const validateResetToken = async token => {
+    const response = await axios({
+        method: 'GET',
+        url: '/api/auth/reset',
+        params: {
+            resetToken: token
+        }
+    });
+    return response;
 };
