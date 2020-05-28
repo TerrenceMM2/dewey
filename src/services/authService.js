@@ -213,6 +213,7 @@ exports.forgotPassword = async (req, res, next) => {
     try {
         const token = crypto.randomBytes(20).toString('hex');
 
+        // 10 minute token created and stored in DB.
         db.user.update(
             {
                 resetPasswordToken: token,
@@ -243,6 +244,38 @@ exports.forgotPassword = async (req, res, next) => {
             error: false,
             statusCode: 200,
             msg: 'Reset email sent.'
+        };
+    } catch (error) {
+        return {
+            error: true,
+            statusCode: 400,
+            error
+        };
+    }
+};
+
+exports.resetToken = async (req, res, next) => {
+    const { resetToken } = req.query;
+    const Op = db.Sequelize.Op;
+
+    try {
+        // Validates include token
+        const validToken = await db.user.findOne({
+            where: { resetPasswordToken: resetToken, resetPasswordExpires: { [Op.gt]: Date.now() } }
+        });
+
+        if (validToken === null) {
+            return {
+                error: false,
+                statusCode: 200,
+                msg: 'Reset token has expired.'
+            };
+        }
+
+        return {
+            error: false,
+            statusCode: 200,
+            msg: 'Reset link ok.'
         };
     } catch (error) {
         return {

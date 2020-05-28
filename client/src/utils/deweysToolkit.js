@@ -112,3 +112,8 @@ export const validateRegistrationStepThree = (
         errors
     };
 };
+
+// validates reset page token
+export const validateResetToken = async () => {
+    await axios;
+};

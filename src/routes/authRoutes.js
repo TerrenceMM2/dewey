@@ -40,4 +40,8 @@ router.patch(
 // @desc sends email to registered user if password is forgotten
 router.post('/api/auth/forgotPassword', AuthController.forgotPassword);
 
+// @route GET api/auth/reset
+// @desc validates reset token
+router.get('/api/auth/reset', AuthController.resetToken);
+
 export default router;
