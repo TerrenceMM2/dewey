@@ -3,26 +3,28 @@ import { Route, Redirect } from 'react-router-dom';
 import { Validate } from './Validate';
 import { Login } from '../pages/Login';
 import { UserContext } from '../context/contexts/UserContext';
+import setAuthToken from './setAuthToken';
 
 export const PrivateRoute = ({ path, component }) => {
     const { user, dispatch } = useContext(UserContext);
     const auth = user.loggedIn;
 
-    // useEffect(() => {
-    //     const sendValidation = async () => {
-    //         try {
-    //             await Validate();
-    //             dispatch({ type: 'VALIDATION_SUCCESS' });
-    //         } catch (error) {
-    //             dispatch({
-    //                 type: 'VALIDATION_FAILURE',
-    //                 payload: { error: `Please sign in to visit the page '${path}'.` }
-    //             });
-    //         }
-    //     };
+    useEffect(() => {
+        const sendValidation = async () => {
+            try {
+                await Validate();
+                dispatch({ type: 'VALIDATION_SUCCESS' });
+                setAuthToken(localStorage.token);
+            } catch (error) {
+                dispatch({
+                    type: 'VALIDATION_FAILURE',
+                    payload: { error: `Please sign in to visit the page '${path}'.` }
+                });
+            }
+        };
 
-    //     sendValidation();
-    // }, [dispatch, path]);
+        sendValidation();
+    }, [dispatch, path]);
 
     return auth ? (
         <Route exact path={path} component={component} />

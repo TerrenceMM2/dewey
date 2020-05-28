@@ -19,8 +19,7 @@ const useStyles = createUseStyles({
         position: 'absolute',
         left: 0,
         top: 0,
-        opacity: 0,
-        cursor: 'pointer'
+        opacity: 0
     }
 });
 
