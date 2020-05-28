@@ -195,7 +195,7 @@ exports.forgotPassword = async (req, res, next) => {
         return {
             error: true,
             statusCode: 400,
-            data: error.details[0].message
+            msg: error.details[0].message
         };
     }
 

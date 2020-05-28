@@ -43,16 +43,17 @@ export const ForgotForm = () => {
     const handleForm = async e => {
         e.preventDefault();
 
-        //     try {
-        //         const response = await SendEmail(email);
-
-        //         dispatch({ type: 'LOGIN_SUCCESS', payload: { user: response.data } });
-        //         setAuthToken(localStorage.token);
-        //     } catch (error) {
-        //         dispatch({ type: 'LOGIN_FAILURE', payload: { message: error.response.data.data } });
-        //         setPassword('');
-        //         setEmail('');
-        //     }
+        try {
+            const response = await SendEmail(email);
+            dispatch({ type: 'RESET_EMAIL_SUCCESS', payload: { message: response.data.msg } });
+            setEmail('');
+        } catch (error) {
+            dispatch({
+                type: 'RESET_EMAIL_FAILURE',
+                payload: { message: error.response.data.msg }
+            });
+            setEmail('');
+        }
     };
 
     return (
@@ -75,7 +76,6 @@ export const ForgotForm = () => {
                             className={classes.form}
                             noValidate
                             autoComplete="off">
-                            {message && <p>{message}</p>}
                             <Typography
                                 variant="body1"
                                 style={{ margin: '20px 0', textAlign: 'center' }}>
@@ -85,6 +85,14 @@ export const ForgotForm = () => {
                                     <em>Dewey forgot to take out the trash this morning.</em>
                                 </Typography>
                             </Typography>
+                            {message && (
+                                <Typography
+                                    variant="body1"
+                                    className={classes.link}
+                                    style={{ margin: '20px 0', textAlign: 'center' }}>
+                                    {message}
+                                </Typography>
+                            )}
                             <TextField
                                 required
                                 fullWidth
