@@ -266,7 +266,7 @@ exports.resetToken = async (req, res, next) => {
 
         if (validToken === null) {
             return {
-                error: false,
+                error: true,
                 statusCode: 200,
                 msg: 'Reset token has expired.'
             };
