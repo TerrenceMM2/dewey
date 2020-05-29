@@ -285,3 +285,41 @@ exports.resetToken = async (req, res, next) => {
         };
     }
 };
+
+exports.resetPassword = async (req, res, next) => {
+    const { resetToken } = req.query;
+    console.log(resetToken);
+    const { password } = req.body;
+
+    const { error } = await passwordValidation(req.body);
+    if (error)
+        return {
+            error: true,
+            statusCode: 400,
+            msg: error.details[0].message
+        };
+
+    const salt = await bcrypt.genSalt();
+
+    const hash = await bcrypt.hash(password, salt);
+
+    try {
+        const isUpdated = await db.user.update(
+            { password: hash },
+            { where: { resetPasswordToken: resetToken } }
+        );
+        if (isUpdated) {
+            return {
+                error: false,
+                statusCode: 200,
+                msg: 'Password successfully updated.'
+            };
+        }
+    } catch (error) {
+        return {
+            error: true,
+            statusCode: 400,
+            error
+        };
+    }
+};

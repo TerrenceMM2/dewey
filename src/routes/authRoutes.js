@@ -44,4 +44,8 @@ router.post('/api/auth/forgotPassword', AuthController.forgotPassword);
 // @desc validates reset token
 router.get('/api/auth/reset', AuthController.resetToken);
 
+// @route PATCH api/auth/reset
+// @desc updates password from reset form
+router.patch('/api/auth/reset', AuthController.resetPassword);
+
 export default router;

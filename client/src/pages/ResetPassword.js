@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
 
-import { PasswordForm } from '../components/PasswordForm/PasswordForm';
+import { ResetForm } from '../components/ResetForm/ResetForm';
 import { validateResetToken } from '../utils/deweysToolkit';
 
 export const ResetPassword = () => {
@@ -18,7 +18,13 @@ export const ResetPassword = () => {
         validate();
     });
 
-    error ? (content = <Redirect to="/" />) : (content = <PasswordForm />);
+    error
+        ? (content = <Redirect to="/" />)
+        : (content = (
+              <div>
+                  <ResetForm token={token} />
+              </div>
+          ));
 
     return <div>{content}</div>;
 };

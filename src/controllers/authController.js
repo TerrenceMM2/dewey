@@ -71,3 +71,12 @@ exports.resetToken = async (req, res, next) => {
         return res.status(error.statusCode).json(error);
     }
 };
+
+exports.resetPassword = async (req, res, next) => {
+    try {
+        const response = await AuthService.resetPassword(req, res, next);
+        return res.status(response.statusCode).json(response);
+    } catch (error) {
+        return res.status(error.statusCode).json(error);
+    }
+};
