@@ -11,7 +11,6 @@ import {
 import ResultsContainer from './ResultsContainer';
 import { makeStyles } from '@material-ui/core/styles';
 import { SendSearch } from './Action';
-
 import Scanner from './Scanner';
 
 const useStyles = makeStyles(theme => ({
@@ -74,6 +73,7 @@ const SearchForm = () => {
 
     return (
         <div>
+            <Scanner handleDetected={handleDetected} />
             <FormControl
                 fullWidth
                 className={classes.root}
@@ -115,7 +115,6 @@ const SearchForm = () => {
             </FormControl>
 
             <Typography variant="body1">{undetectedMessage && undetectedMessage}</Typography>
-            <Scanner handleDetected={handleDetected} />
 
             {books.length > 0 && (
                 <Typography variant="body1">Search results: {books.length}</Typography>

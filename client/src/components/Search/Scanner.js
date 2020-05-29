@@ -1,10 +1,26 @@
 import React, { useRef } from 'react';
 import Quagga from 'quagga';
 import { createUseStyles } from 'react-jss';
+import { Button } from '@material-ui/core';
+import CameraAltIcon from '@material-ui/icons/CameraAlt';
 
 const useStyles = createUseStyles({
     wrapper: {
-        border: 'none'
+        position: 'relative',
+        overflow: 'hidden',
+        display: 'inline-block'
+    },
+    button: {
+        boxShadow: 'none !important',
+        width: 150
+    },
+    input: {
+        fontSize: '100px',
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        opacity: 0,
+        cursor: 'pointer'
     }
 });
 
@@ -43,7 +59,10 @@ const Scanner = props => {
     };
 
     return (
-        <fieldset className={classes.wrapper}>
+        <div className={classes.wrapper}>
+            <Button className={classes.button}>
+                <CameraAltIcon />
+            </Button>
             <input
                 type="file"
                 accept="image/*"
@@ -52,7 +71,7 @@ const Scanner = props => {
                 onChange={handleChange}
                 className={classes.input}
             />
-        </fieldset>
+        </div>
     );
 };
 export default Scanner;
