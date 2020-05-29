@@ -288,7 +288,6 @@ exports.resetToken = async (req, res, next) => {
 
 exports.resetPassword = async (req, res, next) => {
     const { resetToken } = req.query;
-    console.log(resetToken);
     const { password } = req.body;
 
     const { error } = await passwordValidation(req.body);

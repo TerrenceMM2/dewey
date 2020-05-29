@@ -65,49 +65,44 @@ export const ResetForm = props => {
 
     !success
         ? (content = (
-              <Grid container component="main">
-                  <Grid item xs={12} sm={8} md={4}>
-                      <div>
-                          <Typography variant="h5" gutterBottom style={{ textAlign: 'left' }}>
-                              Update Password
-                          </Typography>
-                          <form
-                              onSubmit={handleForm}
-                              className={classes.form}
-                              noValidate
-                              autoComplete="off">
-                              <TextField
-                                  required
-                                  fullWidth
-                                  margin="normal"
-                                  color="secondary"
-                                  variant="outlined"
-                                  type="password"
-                                  label="Password"
-                                  size="small"
-                                  value={password}
-                                  onChange={e => setPassword(e.target.value)}
-                              />
-                              <TextField
-                                  required
-                                  fullWidth
-                                  margin="normal"
-                                  color="secondary"
-                                  variant="outlined"
-                                  type="password"
-                                  label="Confirm password"
-                                  size="small"
-                                  value={match}
-                                  onChange={e => setMatch(e.target.value)}
-                              />
-                              <br />
-                              <Button fullWidth className={classes.submit} type="submit">
-                                  Update
-                              </Button>
-                          </form>
-                      </div>
-                  </Grid>
-              </Grid>
+              <div>
+                  <Typography variant="h5" gutterBottom style={{ textAlign: 'left' }}>
+                      Update Password
+                  </Typography>
+                  <form
+                      onSubmit={handleForm}
+                      className={classes.form}
+                      noValidate
+                      autoComplete="off">
+                      <TextField
+                          required
+                          fullWidth
+                          autoFocus
+                          margin="normal"
+                          color="secondary"
+                          variant="outlined"
+                          type="password"
+                          label="Password"
+                          value={password}
+                          onChange={e => setPassword(e.target.value)}
+                      />
+                      <TextField
+                          required
+                          fullWidth
+                          margin="normal"
+                          color="secondary"
+                          variant="outlined"
+                          type="password"
+                          label="Confirm password"
+                          value={match}
+                          onChange={e => setMatch(e.target.value)}
+                      />
+                      <br />
+                      <Button fullWidth className={classes.submit} type="submit">
+                          Update
+                      </Button>
+                  </form>
+              </div>
           ))
         : (content = (
               <Typography variant="body1" style={{ marginTop: 20 }}>
