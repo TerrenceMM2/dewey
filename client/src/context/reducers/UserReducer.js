@@ -32,11 +32,16 @@ export const UserReducer = (state, action) => {
             return { loggedIn: false, message: action.payload.message };
 
         case 'UPDATE_PASSWORD_SUCCESS':
-            console.log(action.payload);
             return { ...state, updatedPwd: true, message: action.payload.message };
 
         case 'UPDATE_PASSWORD_FAILURE':
             return { ...state, updatedPwd: false, message: action.payload.message };
+
+        case 'RESET_EMAIL_SUCCESS':
+            return { ...state, message: action.payload.message };
+
+        case 'RESET_EMAIL_FAILURE':
+            return { ...state, message: action.payload.message };
 
         default:
             return state;

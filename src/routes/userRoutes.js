@@ -3,7 +3,7 @@ import passport from 'passport';
 import UserController from '../controllers/userController';
 const router = express.Router();
 
-// @route GET api/user/books
+// @route GET api/user/books 🔒
 // @desc gets all books of user
 router.get(
     '/api/user/books',
@@ -11,7 +11,7 @@ router.get(
     UserController.getUserBooks
 );
 
-// @route DELETE api/user/book
+// @route DELETE api/user/book 🔒
 // @desc deletes user book
 router.delete(
     '/api/user/book',
@@ -19,7 +19,7 @@ router.delete(
     UserController.deleteUserBook
 );
 
-// @route PUT api/auth/update
+// @route PUT api/auth/update 🔒
 // @desc updates a users profile
 router.put(
     '/api/user/update',
