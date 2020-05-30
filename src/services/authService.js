@@ -5,6 +5,8 @@ import { loginValidation, passwordValidation, emailValidation } from '../helpers
 import db from '../models';
 import { secretOrKey } from '../config/keys';
 import { transporter } from '../config/nodemailer';
+const hbs = require('nodemailer-express-handlebars');
+const path = require('path');
 
 exports.test = async query => {
     try {
@@ -222,23 +224,45 @@ exports.forgotPassword = async (req, res, next) => {
             { where: { id: emailRegistered.dataValues.id } }
         );
 
+        transporter.use(
+            'compile',
+            hbs({
+                viewEngine: {
+                    extname: '.hbs',
+                    partialsDir: 'src/emailTemplates',
+                    layoutsDir: 'src/emailTemplates/layouts',
+                    defaultLayout: 'main'
+                },
+                viewPath: 'src/emailTemplates',
+                extName: '.hbs'
+            })
+        );
+
         const mailOptions = {
             from: 'admin@deweyreads.com',
             to: email,
             subject: 'Link To Reset Password',
-            text: `Reset password link: ${process.env.APP_HOST}/reset/${token}`
+            text: 'Reset Email',
+            template: 'resetEmail',
+            context: {
+                token,
+                resetUrl: process.env.APP_HOST
+            }
         };
 
-        transporter.sendMail(mailOptions, (error, response) => {
-            if (error) {
-                return {
-                    error: true,
-                    statusCode: 400,
-                    error,
-                    msg: 'There was an issue sending the reset email'
-                };
-            }
-        });
+        const info = await transporter.sendMail(mailOptions);
+        //     , (error, response) => {
+        //     if (error) {
+        //         return {
+        //             error: true,
+        //             statusCode: 400,
+        //             error,
+        //             msg: 'There was an issue sending the reset email'
+        //         };
+        //     }
+        // });
+
+        console.log(info);
 
         return {
             error: false,
@@ -246,10 +270,12 @@ exports.forgotPassword = async (req, res, next) => {
             msg: 'Reset email sent.'
         };
     } catch (error) {
+        console.log(error);
         return {
             error: true,
             statusCode: 400,
-            error
+            error,
+            msg: 'There was an issue sending the reset email'
         };
     }
 };
