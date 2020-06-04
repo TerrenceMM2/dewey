@@ -4,9 +4,8 @@ import * as jwt from 'jsonwebtoken';
 import { loginValidation, passwordValidation, emailValidation } from '../helpers/validationHelper';
 import db from '../models';
 import { secretOrKey } from '../config/keys';
-import { transporter } from '../config/nodemailer';
-const hbs = require('nodemailer-express-handlebars');
-const path = require('path');
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 exports.test = async query => {
     try {
@@ -224,45 +223,15 @@ exports.forgotPassword = async (req, res, next) => {
             { where: { id: emailRegistered.dataValues.id } }
         );
 
-        transporter.use(
-            'compile',
-            hbs({
-                viewEngine: {
-                    extname: '.hbs',
-                    partialsDir: 'src/emailTemplates',
-                    layoutsDir: 'src/emailTemplates/layouts',
-                    defaultLayout: 'main'
-                },
-                viewPath: 'src/emailTemplates',
-                extName: '.hbs'
-            })
-        );
-
-        const mailOptions = {
-            from: 'admin@deweyreads.com',
+        const msg = {
             to: email,
-            subject: 'Link To Reset Password',
-            text: 'Reset Email',
-            template: 'resetEmail',
-            context: {
-                token,
-                resetUrl: process.env.APP_HOST
-            }
+            from: 'admin@deweyreads.com',
+            subject: 'Sending with Twilio SendGrid is Fun',
+            text: 'and easy to do anywhere, even with Node.js',
+            html: '<strong>and easy to do anywhere, even with Node.js</strong>'
         };
 
-        const info = await transporter.sendMail(mailOptions);
-        //     , (error, response) => {
-        //     if (error) {
-        //         return {
-        //             error: true,
-        //             statusCode: 400,
-        //             error,
-        //             msg: 'There was an issue sending the reset email'
-        //         };
-        //     }
-        // });
-
-        console.log(info);
+        sgMail.send(msg);
 
         return {
             error: false,
