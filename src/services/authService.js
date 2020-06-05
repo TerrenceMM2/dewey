@@ -4,7 +4,8 @@ import * as jwt from 'jsonwebtoken';
 import { loginValidation, passwordValidation, emailValidation } from '../helpers/validationHelper';
 import db from '../models';
 import { secretOrKey } from '../config/keys';
-import { transporter } from '../config/nodemailer';
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 exports.test = async query => {
     try {
@@ -222,23 +223,15 @@ exports.forgotPassword = async (req, res, next) => {
             { where: { id: emailRegistered.dataValues.id } }
         );
 
-        const mailOptions = {
-            from: 'admin@deweyreads.com',
+        const msg = {
             to: email,
-            subject: 'Link To Reset Password',
-            text: `Reset password link: ${process.env.APP_HOST}/reset/${token}`
+            from: 'admin@deweyreads.com',
+            subject: 'Sending with Twilio SendGrid is Fun',
+            text: `${process.env.APP_HOST}/reset/${token}`,
+            html: `${process.env.APP_HOST}/reset/${token}`
         };
 
-        transporter.sendMail(mailOptions, (error, response) => {
-            if (error) {
-                return {
-                    error: true,
-                    statusCode: 400,
-                    error,
-                    msg: 'There was an issue sending the reset email'
-                };
-            }
-        });
+        sgMail.send(msg);
 
         return {
             error: false,
@@ -246,10 +239,12 @@ exports.forgotPassword = async (req, res, next) => {
             msg: 'Reset email sent.'
         };
     } catch (error) {
+        console.log(error);
         return {
             error: true,
             statusCode: 400,
-            error
+            error,
+            msg: 'There was an issue sending the reset email'
         };
     }
 };
