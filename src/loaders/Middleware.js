@@ -2,6 +2,7 @@ import { morganConfig } from '../config/morganConfig';
 import compression from 'compression';
 import cors from 'cors';
 import passport from 'passport';
+const root = require('path').join(__dirname, '..', '..', 'client', 'build');
 
 export class Middleware {
     // constructor brings in app and express
@@ -20,12 +21,13 @@ export class Middleware {
         // express parsing
         this.app.use(this.express.urlencoded({ extended: true }));
         this.app.use(this.express.json());
+        this.app.use(this.express.static(root));
 
-    // morgan logging activation
-    this.app.use(morganConfig);
+        // morgan logging activation
+        this.app.use(morganConfig);
 
-    // passport initialization
-    this.app.use(passport.initialize());
-    require('../config/passport')(passport);
-  }
+        // passport initialization
+        this.app.use(passport.initialize());
+        require('../config/passport')(passport);
+    }
 }
