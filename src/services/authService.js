@@ -227,8 +227,8 @@ exports.forgotPassword = async (req, res, next) => {
             to: email,
             from: 'admin@deweyreads.com',
             subject: 'Sending with Twilio SendGrid is Fun',
-            text: 'and easy to do anywhere, even with Node.js',
-            html: '<strong>and easy to do anywhere, even with Node.js</strong>'
+            text: `${process.env.APP_HOST}/reset/${token}`,
+            html: `${process.env.APP_HOST}/reset/${token}`
         };
 
         sgMail.send(msg);
