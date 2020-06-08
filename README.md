@@ -2,7 +2,7 @@
 <p align="center"><img width=50% src="./docs/dir_assets/title.png"></p>
 
 <div align="center">
-<img src="https://img.shields.io/website?label=AWS%20Deployment&logo=amazon-aws&style=for-the-badge&url=http%3A%2F%2Fbooktracker-env.eba-vxhiqmya.us-east-2.elasticbeanstalk.com%2F" />
+<img src="https://img.shields.io/website?label=AWS%20Deployment&logo=amazon-aws&style=for-the-badge&url=deweyreads.com%2F" />
 <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" />
 <img src="https://img.shields.io/badge/version-v0.0.1.alpha-blue?style=for-the-badge" />
 <img src="https://img.shields.io/github/issues/terrencemm2/dewey?label=issues&logo=github&style=for-the-badge" />
