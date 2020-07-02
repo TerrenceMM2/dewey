@@ -45,5 +45,9 @@ module.exports = function (sequelize, Sequelize) {
         }
     });
 
+    User.associate = function (models) {
+        User.belongsToMany(models.book, { through: 'ownership' });
+    };
+
     return User;
 };

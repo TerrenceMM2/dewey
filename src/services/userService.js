@@ -4,16 +4,19 @@ exports.getUserBooks = async (req, res, next) => {
     const userId = req.user.dataValues.id;
 
     try {
-        const books = await db.ownership.findAll({
+        const profile = await db.user.findOne({
             where: {
-                userId
+                id: userId
+            },
+            include: {
+                model: db.book,
+                through: { attributes: [] }
             }
         });
-
         return {
             error: false,
             statusCode: 200,
-            data: books
+            data: profile.books
         };
     } catch (error) {
         return {
