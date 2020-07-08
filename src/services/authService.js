@@ -1,8 +1,11 @@
 import bcrypt from 'bcryptjs';
+import crypto from 'crypto';
 import * as jwt from 'jsonwebtoken';
-import { loginValidation, passwordValidation } from '../helpers/validationHelper';
+import { loginValidation, passwordValidation, emailValidation } from '../helpers/validationHelper';
 import db from '../models';
 import { secretOrKey } from '../config/keys';
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 exports.test = async query => {
     try {
@@ -18,6 +21,37 @@ exports.test = async query => {
             errors
         };
     }
+};
+
+// UTILITY
+// Checks if email exists in the database.
+exports.checkEmail = async (req, res, next) => {
+    const { email } = req.params;
+
+    const emailRegistered = await db.user.findOne({ where: { email } });
+
+    if (emailRegistered) {
+        return {
+            error: false,
+            statusCode: 200,
+            isUsed: true
+        };
+    }
+    return {
+        error: false,
+        statusCode: 200,
+        isUsed: false
+    };
+};
+
+// UTILITY
+// Checks if user has a valid token.
+exports.validate = async (req, res, next) => {
+    return {
+        error: false,
+        statusCode: 200,
+        data: 'Authorized'
+    };
 };
 
 exports.register = async (req, res, next) => {
@@ -119,33 +153,6 @@ exports.login = async (req, res, next) => {
     };
 };
 
-exports.checkEmail = async (req, res, next) => {
-    const { email } = req.params;
-
-    const emailRegistered = await db.user.findOne({ where: { email } });
-
-    if (emailRegistered) {
-        return {
-            error: false,
-            statusCode: 200,
-            isUsed: true
-        };
-    }
-    return {
-        error: false,
-        statusCode: 200,
-        isUsed: false
-    };
-};
-
-exports.validate = async (req, res, next) => {
-    return {
-        error: false,
-        statusCode: 200,
-        data: 'Authorized'
-    };
-};
-
 exports.updatePassword = async (req, res, next) => {
     const userId = req.user.id;
     const { password } = req.body;
@@ -164,6 +171,137 @@ exports.updatePassword = async (req, res, next) => {
 
     try {
         const isUpdated = await db.user.update({ password: hash }, { where: { id: userId } });
+        if (isUpdated) {
+            return {
+                error: false,
+                statusCode: 200,
+                msg: 'Password successfully updated.'
+            };
+        }
+    } catch (error) {
+        return {
+            error: true,
+            statusCode: 400,
+            error
+        };
+    }
+};
+
+exports.forgotPassword = async (req, res, next) => {
+    const { email } = req.body;
+
+    const { error } = await emailValidation(req.body);
+
+    if (error) {
+        return {
+            error: true,
+            statusCode: 400,
+            msg: error.details[0].message
+        };
+    }
+
+    const emailRegistered = await db.user.findOne({ where: { email } });
+
+    if (!emailRegistered) {
+        return {
+            error: false,
+            statusCode: 200,
+            isUsed: false,
+            msg: 'Email not found.'
+        };
+    }
+
+    try {
+        const token = crypto.randomBytes(20).toString('hex');
+
+        // 10 minute token created and stored in DB.
+        db.user.update(
+            {
+                resetPasswordToken: token,
+                resetPasswordExpires: Date.now() + 360000
+            },
+            { where: { id: emailRegistered.dataValues.id } }
+        );
+
+        const msg = {
+            to: email,
+            from: 'admin@deweyreads.com',
+            subject: 'Sending with Twilio SendGrid is Fun',
+            text: `${process.env.APP_HOST}/reset/${token}`,
+            html: `${process.env.APP_HOST}/reset/${token}`
+        };
+
+        sgMail.send(msg);
+
+        return {
+            error: false,
+            statusCode: 200,
+            msg: 'Reset email sent.'
+        };
+    } catch (error) {
+        console.log(error);
+        return {
+            error: true,
+            statusCode: 400,
+            error,
+            msg: 'There was an issue sending the reset email'
+        };
+    }
+};
+
+exports.resetToken = async (req, res, next) => {
+    const { resetToken } = req.query;
+    const Op = db.Sequelize.Op;
+
+    try {
+        // Validates include token
+        const validToken = await db.user.findOne({
+            where: { resetPasswordToken: resetToken, resetPasswordExpires: { [Op.gt]: Date.now() } }
+        });
+
+        if (validToken === null) {
+            return {
+                error: true,
+                statusCode: 200,
+                msg: 'Reset token has expired.'
+            };
+        }
+
+        return {
+            error: false,
+            statusCode: 200,
+            msg: 'Reset link ok.'
+        };
+    } catch (error) {
+        return {
+            error: true,
+            statusCode: 400,
+            error
+        };
+    }
+};
+
+exports.resetPassword = async (req, res, next) => {
+    const { resetToken } = req.query;
+    const { password } = req.body;
+
+    const { error } = await passwordValidation(req.body);
+    if (error)
+        return {
+            error: true,
+            statusCode: 400,
+            msg: error.details[0].message
+        };
+
+    const salt = await bcrypt.genSalt();
+
+    const hash = await bcrypt.hash(password, salt);
+
+    try {
+        const isUpdated = await db.user.update(
+            { password: hash },
+            { where: { resetPasswordToken: resetToken } }
+        );
         if (isUpdated) {
             return {
                 error: false,

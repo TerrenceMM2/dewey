@@ -34,5 +34,12 @@ module.exports = {
             password: joi.string().min(6).required()
         });
         return schema.validate(data);
+    },
+
+    emailValidation: data => {
+        const schema = joi.object({
+            email: joi.string().email().min(6).required()
+        });
+        return schema.validate(data);
     }
 };

@@ -14,7 +14,7 @@ router.get('/api/book', BookController.getAll);
 // @route GET /api/book/search/:searchTerm?searchType=isbn
 // @route GET /api/book/search/:searchTerm?searchType=author
 // @route GET /api/book/search/:searchTerm?searchType=title
-// @desc makes a query to the db and searches for book, relays to gbooks if necessary
+// @desc makes a query to the db and searches for book, relays to gbooks if necessary 🔒
 router.get(
     '/api/book/search/:searchTerm',
     passport.authenticate('jwt', { session: false }),
@@ -27,7 +27,7 @@ router.post(
     BookController.createBookRecord
 );
 
-// @route POST api/book
+// @route POST api/book 🔒
 // @desc add book/user crossref record
 router.post('/api/book', passport.authenticate('jwt', { session: false }), BookController.addBook);
 

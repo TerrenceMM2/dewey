@@ -114,7 +114,9 @@ export const LoginForm = () => {
                           </form>
 
                           <Typography variant="body1" style={{ marginTop: 20 }}>
-                              Forgot password?
+                              <Link to="/forgotPassword" className={classes.link}>
+                                  Forgot password?
+                              </Link>
                           </Typography>
 
                           <Typography variant="body1" style={{ marginTop: 20 }}>
