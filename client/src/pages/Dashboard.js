@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../context/contexts/UserContext';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import SearchForm from '../components/Search/SearchForm';
 // style imports
 import { makeStyles } from '@material-ui/core/styles';

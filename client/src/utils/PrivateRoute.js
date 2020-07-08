@@ -3,6 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { Validate } from './Validate';
 import { Login } from '../pages/Login';
 import { UserContext } from '../context/contexts/UserContext';
+import setAuthToken from './setAuthToken';
 
 export const PrivateRoute = ({ path, component }) => {
     const { user, dispatch } = useContext(UserContext);
@@ -13,6 +14,7 @@ export const PrivateRoute = ({ path, component }) => {
             try {
                 await Validate();
                 dispatch({ type: 'VALIDATION_SUCCESS' });
+                setAuthToken(localStorage.token);
             } catch (error) {
                 dispatch({
                     type: 'VALIDATION_FAILURE',

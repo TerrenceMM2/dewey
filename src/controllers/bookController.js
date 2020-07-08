@@ -43,6 +43,15 @@ exports.getBook = async (req, res, next) => {
     }
 };
 
+exports.createBookRecord = async (req, res, next) => {
+    try {
+        const response = await BookService.createBookRecord(req);
+        return res.status(response.statusCode).json(response);
+    } catch (error) {
+        return res.status(error.statusCode).json(error);
+    }
+};
+
 exports.addBook = async (req, res, next) => {
     try {
         const response = await BookService.addBook(req);

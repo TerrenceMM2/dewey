@@ -9,8 +9,6 @@ import { Typography } from '@material-ui/core';
 export const Account = () => {
     const { user } = useContext(UserContext);
     const auth = user.loggedIn;
-    console.log(user);
-
     let content;
 
     auth

@@ -234,20 +234,81 @@ exports.getBookTitle = async title => {
     }
 };
 
-exports.addBook = async req => {
+exports.createBookRecord = async req => {
     try {
-        const userId = req.user.dataValues.id;
+        // check if book already exists
+        const existingBook = await db.book.findOne({
+            where: {
+                isbn: req.body.isbn
+            }
+        });
+
+        // if it does, return it
+        if (existingBook) {
+            return {
+                error: false,
+                statusCode: 200,
+                book: existingBook
+            };
+        }
+
+        // otherwise create a new record
+        const newRecord = await db.book.create(req.body);
+
+        // and return the saved record
+        return {
+            error: false,
+            statusCode: 201,
+            book: newRecord
+        };
+    } catch (error) {
+        console.log(error);
+
+        return {
+            error: true,
+            statusCode: 500,
+            error
+        };
+    }
+};
+
+exports.addBook = async req => {
+    console.log('user id', req.user.id);
+    console.log('book id', req.body);
+
+    try {
+        const userId = req.user.id;
         const bookId = req.body.bookId;
+
+        // check if relationship already exists
+        const existingRelationship = await db.ownership.findOne({
+            where: {
+                userId,
+                bookId
+            }
+        });
+
+        // if it does, return this confirmatiom
+        if (existingRelationship) {
+            return {
+                error: false,
+                statusCode: 200,
+                bookAdded: false,
+                msg: 'This book is already in your library.'
+            };
+        }
 
         const data = await db.ownership.create({ userId, bookId });
 
         return {
             error: false,
             statusCode: 201,
-            msg: 'Book added.',
+            bookAdded: true,
+            msg: 'Book has been added to library.',
             data
         };
     } catch (error) {
+        console.log(error);
         return {
             error: true,
             statusCode: 500,

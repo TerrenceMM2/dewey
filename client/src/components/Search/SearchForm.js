@@ -71,6 +71,12 @@ const SearchForm = () => {
         }
     };
 
+    const handleClear = () => {
+        setBooks([]);
+        setSearchType('');
+        setSearchTerm('');
+    };
+
     return (
         <div>
             <Scanner handleDetected={handleDetected} />
@@ -117,11 +123,14 @@ const SearchForm = () => {
             <Typography variant="body1">{undetectedMessage && undetectedMessage}</Typography>
 
             {books.length > 0 && (
-                <Typography variant="body1">Search results: {books.length}</Typography>
+                <>
+                    <Button onClick={handleClear}>Clear Search</Button>
+                    <Typography variant="body1">Search results: {books.length}</Typography>
+                </>
             )}
 
             {books.map(book => {
-                return <ResultsContainer book={book} />;
+                return <ResultsContainer book={book} key={book.isbn} />;
             })}
         </div>
     );

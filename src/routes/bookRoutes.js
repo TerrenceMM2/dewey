@@ -21,6 +21,12 @@ router.get(
     BookController.getBook
 );
 
+router.post(
+    '/api/book/create',
+    passport.authenticate('jwt', { session: false }),
+    BookController.createBookRecord
+);
+
 // @route POST api/book 🔒
 // @desc add book/user crossref record
 router.post('/api/book', passport.authenticate('jwt', { session: false }), BookController.addBook);
