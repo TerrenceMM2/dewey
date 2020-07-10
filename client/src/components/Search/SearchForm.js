@@ -59,6 +59,8 @@ const SearchForm = () => {
     };
 
     const handleSearch = async event => {
+        event.preventDefault();
+
         setUndetectedMessage('');
         setBooks([]);
         try {
@@ -80,45 +82,47 @@ const SearchForm = () => {
     return (
         <div>
             <Scanner handleDetected={handleDetected} />
-            <FormControl
-                fullWidth
-                className={classes.root}
-                variant="outlined"
-                color="secondary"
-                noValidate
-                autoComplete="off"
-                style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-                <InputLabel id="search-type">Search type</InputLabel>
-                <Select
-                    className={classes.largeForm}
-                    label="Search type"
-                    labelId="search-type"
-                    id="search-type"
-                    value={searchType}
-                    onChange={handleChange}>
-                    <MenuItem value="isbn">ISBN</MenuItem>
-                    <MenuItem value="author">Author name</MenuItem>
-                    <MenuItem value="title">Book title</MenuItem>
-                </Select>
+            <form onSubmit={handleSearch}>
+                <FormControl
+                    fullWidth
+                    className={classes.root}
+                    variant="outlined"
+                    color="secondary"
+                    noValidate
+                    autoComplete="off"
+                    style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                    <InputLabel id="search-type">Search type</InputLabel>
+                    <Select
+                        className={classes.largeForm}
+                        label="Search type"
+                        labelId="search-type"
+                        id="search-type"
+                        value={searchType}
+                        onChange={handleChange}>
+                        <MenuItem value="isbn">ISBN</MenuItem>
+                        <MenuItem value="author">Author name</MenuItem>
+                        <MenuItem value="title">Book title</MenuItem>
+                    </Select>
 
-                {searchType !== '' && (
-                    <>
-                        <TextField
-                            fullWidth
-                            id="outlined-basic"
-                            label="Search"
-                            variant="outlined"
-                            color="secondary"
-                            onChange={e => setSearchTerm(e.target.value)}
-                            value={searchTerm}
-                            className={classes.largeForm}
-                        />
-                        <Button className={classes.largeForm} onClick={handleSearch}>
-                            Search
-                        </Button>
-                    </>
-                )}
-            </FormControl>
+                    {searchType !== '' && (
+                        <>
+                            <TextField
+                                fullWidth
+                                id="outlined-basic"
+                                label="Search"
+                                variant="outlined"
+                                color="secondary"
+                                onChange={e => setSearchTerm(e.target.value)}
+                                value={searchTerm}
+                                className={classes.largeForm}
+                            />
+                            <Button className={classes.largeForm} type="submit">
+                                Search
+                            </Button>
+                        </>
+                    )}
+                </FormControl>
+            </form>
 
             <Typography variant="body1">{undetectedMessage && undetectedMessage}</Typography>
 
