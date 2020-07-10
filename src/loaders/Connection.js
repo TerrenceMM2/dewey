@@ -27,7 +27,7 @@ export class Connection {
     async launch() {
         try {
             // syncs the db
-            await db.sequelize.sync({ alter: true });
+            await db.sequelize.sync();
             this.app.use(this.express.static(path.join(__dirname, '../../client', 'build')));
 
             // launches the app
