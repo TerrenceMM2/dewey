@@ -7,7 +7,7 @@ import { SaveBook, CreateRelationship } from './Action';
 const useStyles = makeStyles(theme => ({
     card: {
         margin: theme.spacing(2, 1),
-        padding: theme.spacing(2),
+        padding: theme.spacing(0.5),
         display: 'flex',
         justifyContent: 'space-between'
     }
@@ -43,7 +43,7 @@ const ResultsContainer = ({ book }) => {
                     {book.bookName}
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                    {book.bookAuthor}
+                    {JSON.parse(book.bookAuthor).join(', ')}
                 </Typography>
                 <Typography variant="body2">{truncate(book.bookDesc, 280)}</Typography>
             </CardContent>
