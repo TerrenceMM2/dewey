@@ -3,7 +3,6 @@
     "version": "1.0.0",
     "description": "🚧  Under Construction  🚧",
     "main": "server.js",
-    "homepage": "https://deweyreads.herokuapp.com/",
     "scripts": {
         "client-install": "npm install --prefix client",
         "deploy": "npm run build --prefix client && git add -A && git commit -m \"deployment ready\" && git push origin HEAD",
@@ -24,7 +23,7 @@
     "bugs": {
         "url": "https://github.com/acd37/dewey/issues"
     },
-    "homepage": "https://github.com/acd37/dewey#readme",
+    "homepage": "https://deweyreads.herokuapp.com/",
     "dependencies": {
         "@babel/runtime": "^7.9.2",
         "@hapi/joi": "^17.1.1",
