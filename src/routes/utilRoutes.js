@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-const root = require('path').join(__dirname, '..', 'client', 'build');
+const root = require('path').join(__dirname, 'client', 'build');
 
 // @route GET *
 // @desc catch all route
