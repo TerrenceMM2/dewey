@@ -1,0 +1,28 @@
+{
+    "files": {
+        "main.css": "/static/css/main.8e20b2d9.chunk.css",
+        "main.js": "/static/js/main.63f8f07c.chunk.js",
+        "main.js.map": "/static/js/main.63f8f07c.chunk.js.map",
+        "runtime-main.js": "/static/js/runtime-main.784c586e.js",
+        "runtime-main.js.map": "/static/js/runtime-main.784c586e.js.map",
+        "static/js/2.c11b5c37.chunk.js": "/static/js/2.c11b5c37.chunk.js",
+        "static/js/2.c11b5c37.chunk.js.map": "/static/js/2.c11b5c37.chunk.js.map",
+        "index.html": "/index.html",
+        "precache-manifest.47ed6c49def279471b1f627deb7e853a.js": "/precache-manifest.47ed6c49def279471b1f627deb7e853a.js",
+        "service-worker.js": "/service-worker.js",
+        "static/css/main.8e20b2d9.chunk.css.map": "/static/css/main.8e20b2d9.chunk.css.map",
+        "static/js/2.c11b5c37.chunk.js.LICENSE.txt": "/static/js/2.c11b5c37.chunk.js.LICENSE.txt",
+        "static/media/App.css": "/static/media/raleway-v14-latin-regular.f6c57152.svg",
+        "static/media/avatar.png": "/static/media/avatar.d75a49bd.png",
+        "static/media/dewey_crying.png": "/static/media/dewey_crying.dc3a13cd.png",
+        "static/media/dewey_embarrassed.png": "/static/media/dewey_embarrassed.145e7cc4.png",
+        "static/media/dewey_sick.png": "/static/media/dewey_sick.e303120f.png",
+        "static/media/dewey_writing.png": "/static/media/dewey_writing.82f75b96.png"
+    },
+    "entrypoints": [
+        "static/js/runtime-main.784c586e.js",
+        "static/js/2.c11b5c37.chunk.js",
+        "static/css/main.8e20b2d9.chunk.css",
+        "static/js/main.63f8f07c.chunk.js"
+    ]
+}
