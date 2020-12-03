@@ -2,7 +2,7 @@ import { morganConfig } from '../config/morganConfig';
 import compression from 'compression';
 import cors from 'cors';
 import passport from 'passport';
-const root = require('path').join(__dirname, '..', '..', 'client', 'build');
+const root = require('path').join(__dirname, 'client', 'build');
 
 export class Middleware {
     // constructor brings in app and express
