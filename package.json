@@ -7,9 +7,10 @@
         "client-install": "npm install --prefix client",
         "deploy": "npm run build --prefix client && git add -A && git commit -m \"deployment ready\" && git push origin HEAD",
         "start": "node dist/server.js",
-        "build": "babel src --out-dir dist && npm run build --prefix client",
+        "build": "babel src --out-dir dist && cd client && npm run build",
         "server": "nodemon --exec babel-node src/server.js",
         "client": "npm start --prefix client",
+        "install": "cd client && npm install",
         "dev": "concurrently --kill-others \"npm run server\" \"npm run client\"",
         "pretty-quick": "pretty-quick"
     },
