@@ -2,7 +2,7 @@
 <p align="center"><img width=50% src="./docs/dir_assets/title.png"></p>
 
 <div align="center">
-<img src="https://img.shields.io/website?label=AWS%20Deployment&logo=amazon-aws&style=for-the-badge&url=https://deweyreads.com%2F" />
+<img src="https://img.shields.io/website?label=Heroku%20Deployment&logo=heroku&style=for-the-badge&url=https://deweyreads.com%2F" />
 <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" />
 <img src="https://img.shields.io/badge/version-v0.0.1.alpha-blue?style=for-the-badge" />
 <img src="https://img.shields.io/github/issues/terrencemm2/dewey?label=issues&logo=github&style=for-the-badge" />
@@ -31,7 +31,7 @@ _Dewey is a personal library application that allows you to keep track of all bo
 
 ## The Tech Stuff
 
-**Deployment**: AWS CodeBuild, AWS CodePipeline, AWS Elastic Beanstalk
+**Deployment**: ~~AWS CodeBuild, AWS CodePipeline, AWS Elastic Beanstalk~~ Heroku _(AWS got to be too expensive.)_
 
 **Server**: Node.js, Express, MySQL, Passport.js
 
@@ -67,6 +67,15 @@ DB_PROD_PORT=3306
 
 # SECRET
 SECRET_KEY=
+
+# Google Books API Key
+GB_KEY=
+
+# EMAIL
+APP_HOST=
+EMAIL_ADDRESS=
+EMAIL_PASSWORD=
+SENDGRID_API_KEY=
 ```
 
 You will need your own instance of a local and production MySQL database. Any `SECRET_KEY` will be fine. We encourage strong keys.
@@ -84,7 +93,7 @@ A member of our development team will review, request changes as needed, and app
 
 ## 🚨 Disclaimer 🚨
 
-You assume full risk by using our code, and are reponsible for securing your own API keys, where applicable.
+You assume full risk by using our code, and are responsible for securing your own API keys, where applicable.
 
 ### Developers
 
