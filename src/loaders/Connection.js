@@ -4,6 +4,8 @@ import path from 'path';
 import chalk from 'chalk';
 import { PORT } from '../constants';
 
+const root = path.join(__dirname, '..', '..', 'client', 'build');
+
 export class Connection {
     // brings in app and express
     constructor(app, express) {
@@ -28,7 +30,7 @@ export class Connection {
         try {
             // syncs the db
             await db.sequelize.sync();
-            this.app.use(this.express.static(path.join(__dirname, '..', '..', 'client', 'build')));
+            this.app.use(this.express.static(root));
 
             // launches the app
             this.app.listen(PORT, () => {
