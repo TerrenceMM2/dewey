@@ -5,8 +5,7 @@
     "main": "server.js",
     "scripts": {
         "deploy": "npm run build --prefix client && git add -A && git commit -m \"deployment ready\" && git push origin HEAD",
-        "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-        "start:prod": "node dist/server.js",
+        "start": "node dist/server.js",
         "start:dev": "concurrently --kill-others \"npm run server\" \"npm run client\"",
         "build": "babel src --out-dir dist && cd client && npm run build",
         "server": "nodemon --exec babel-node src/server.js",
