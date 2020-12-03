@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "🚧  Under Construction  🚧",
     "main": "server.js",
+    "homepage": "https://deweyreads.herokuapp.com/",
     "scripts": {
         "client-install": "npm install --prefix client",
         "deploy": "npm run build --prefix client && git add -A && git commit -m \"deployment ready\" && git push origin HEAD",
