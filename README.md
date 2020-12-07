@@ -2,7 +2,7 @@
 <p align="center"><img width=50% src="./docs/dir_assets/title.png"></p>
 
 <div align="center">
-<img src="https://img.shields.io/website?label=Heroku%20Deployment&logo=heroku&style=for-the-badge&url=https://deweyreads.com%2F" />
+<img src="https://img.shields.io/website?label=Heroku%20Deployment&logo=heroku&style=for-the-badge&url=https://deweyreads.herokuapp.com/" />
 <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" />
 <img src="https://img.shields.io/badge/version-v0.0.1.alpha-blue?style=for-the-badge" />
 <img src="https://img.shields.io/github/issues/terrencemm2/dewey?label=issues&logo=github&style=for-the-badge" />
@@ -19,7 +19,7 @@
 
 ## Live Link
 
-[deweyreads.com](http://deweyreads.com)
+[https://deweyreads.herokuapp.com/](https://deweyreads.herokuapp.com/)
 
 ## About
 
@@ -46,7 +46,7 @@ Once you have this available:
 1. Obtain the code
 
 -   **Option 1**: 🍴 Fork the repository
--   **Option 2**: 👯 Clone the repo with `git clone git@github.com:acd37/dewey.git`
+-   **Option 2**: 👯 Clone the repo with `git clone git@github.com:TerrenceMM2/dewey.git`
 
 2. 🤫 Create a `.env` file in the root directory, and include the following information:
 
