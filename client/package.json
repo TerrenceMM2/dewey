@@ -12,7 +12,7 @@
         "@testing-library/react": "^9.3.2",
         "@testing-library/user-event": "^7.1.2",
         "@zxing/library": "^0.17.0",
-        "axios": "^0.19.2",
+        "axios": "^0.21.1",
         "jwt-decode": "^2.2.0",
         "quagga": "^0.12.1",
         "react": "^16.13.1",
